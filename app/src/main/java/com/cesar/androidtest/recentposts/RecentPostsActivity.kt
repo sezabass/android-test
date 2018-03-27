@@ -2,6 +2,7 @@ package com.cesar.androidtest.recentposts
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import com.cesar.androidtest.R
 import com.cesar.androidtest.httpclient.retrofit.di.DaggerNetworkComponent
 import com.cesar.androidtest.recentposts.di.DaggerRecentPostsComponent
@@ -31,4 +32,7 @@ class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View {
         recentPostsPresenter.onLoad()
     }
 
+    override fun onListLoadingComplete() {
+        Log.v(this.javaClass.simpleName, "TODO: Implement list loading complete")
+    }
 }

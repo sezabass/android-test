@@ -8,8 +8,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class RecentPostsModel (val service: RecentPostsService
-) : RecentPostsContract.Model {
+class RecentPostsModel(val service: RecentPostsService) : RecentPostsContract.Model {
 
     var presenter: RecentPostsContract.Presenter? = null
 

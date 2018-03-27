@@ -1,6 +1,5 @@
 package com.cesar.androidtest.recentposts
 
-import android.util.Log
 import javax.inject.Inject
 
 class RecentPostsPresenter @Inject constructor(
@@ -12,7 +11,7 @@ class RecentPostsPresenter @Inject constructor(
     }
 
     override fun onRequestListSuccess() {
-        Log.v("RecentPosts", "SUCESSO!!!")
+        view.onListLoadingComplete()
     }
 
 }
