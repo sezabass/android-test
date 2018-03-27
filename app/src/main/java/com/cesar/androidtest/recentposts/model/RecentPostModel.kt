@@ -9,13 +9,8 @@ class RecentPostModel {
 }
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-class Child {
-    val data: Data? = null
-}
-
-@JsonIgnoreProperties(ignoreUnknown = true)
 class Data {
-    val children: Array<Child>? = null
+    val children: Array<RecentPostModel>? = null
     val title: String? = null
     val url: String? = null
     val preview: Preview? = null
@@ -28,7 +23,13 @@ class Preview {
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 class Images {
+    val source: Source? = null
     val resolutions: Array<Resolutions>? = null
+}
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+class Source {
+    val url: String? = null
 }
 
 @JsonIgnoreProperties(ignoreUnknown = true)
