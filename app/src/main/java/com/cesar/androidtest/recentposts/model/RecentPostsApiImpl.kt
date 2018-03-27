@@ -19,7 +19,7 @@ class RecentPostsApiImpl(val service: RecentPostsService) : RecentPostsApi {
             override fun onResponse(call: Call<RecentPostModel>?, response: Response<RecentPostModel>?) {
                 if (response!!.isSuccessful) {
                     response.body()?.data?.children?.let {
-                        callback.onResponseSuccessful(it.toList())
+                        callback.onResponseSuccessful(it.toMutableList())
                     }
                 } else {
                     callback.onResponseNotSuccessful()

@@ -12,7 +12,7 @@ class RecentPostsModel(val api: RecentPostsApi) : RecentPostsContract.Model {
 
         api.list(object : RecentPostsApi.ResultListener {
             override fun onResponseSuccessful(response: List<RecentPostModel>) {
-                presenter?.onRequestListResponseSuccessful()
+                presenter?.onRequestListResponseSuccessful(response)
             }
 
             override fun onResponseNotSuccessful() {
@@ -23,8 +23,6 @@ class RecentPostsModel(val api: RecentPostsApi) : RecentPostsContract.Model {
                 presenter?.onRequestListFailure()
             }
         })
-
-        presenter?.onRequestListResponseSuccessful()
     }
 
 }

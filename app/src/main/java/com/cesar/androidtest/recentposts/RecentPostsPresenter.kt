@@ -1,5 +1,6 @@
 package com.cesar.androidtest.recentposts
 
+import com.cesar.androidtest.recentposts.model.RecentPostModel
 import javax.inject.Inject
 
 class RecentPostsPresenter @Inject constructor(
@@ -10,8 +11,8 @@ class RecentPostsPresenter @Inject constructor(
         model.requestList()
     }
 
-    override fun onRequestListResponseSuccessful() {
-        view.onListLoadingComplete()
+    override fun onRequestListResponseSuccessful(response: List<RecentPostModel>) {
+        view.onListLoadingComplete(response)
     }
 
     override fun onRequestListResponseNotSuccessful() {

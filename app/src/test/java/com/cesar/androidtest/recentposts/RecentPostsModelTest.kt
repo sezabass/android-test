@@ -36,7 +36,8 @@ class RecentPostsModelTest {
     @Test
     fun givenRequestListWhenSuccessThenCallPresenterOnSuccess() {
         model.requestList()
-        verify(mockPresenter, times(1)).onRequestListResponseSuccessful()
+        verify(mockPresenter, times(1)).
+                onRequestListResponseSuccessful(any())
     }
 
 }
