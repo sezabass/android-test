@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -22,6 +24,11 @@ android {
     }
 }
 
+ext {
+    retrofit_version = '2.4.0'
+    dagger_version = '2.15'
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -30,11 +37,36 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
-    //Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-    implementation 'com.squareup.retrofit2:converter-jackson:2.4.0'
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-jackson:$retrofit_version"
 
+    // Dagger
+    implementation "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+    compileOnly 'javax.annotation:jsr250-api:1.0'
+
+    // Tests -----------
+
+    // Core
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    // Mockito
+    testImplementation 'org.mockito:mockito-core:2.16.0'
+    testImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
+}
+
+kapt {
+    generateStubs = true
+}
+
+android.applicationVariants.all { variant ->
+    if (variant.buildType.name == "debug") {
+        def aptOutputDir = new File(buildDir, "generated/source/apt/${variant.unitTestVariant.dirName}")
+        variant.unitTestVariant.addJavaSourceFoldersToModel(aptOutputDir)
+        assembleDebug.finalizedBy('assembleDebugUnitTest')
+    }
 }
