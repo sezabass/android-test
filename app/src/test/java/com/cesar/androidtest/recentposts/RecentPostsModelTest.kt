@@ -1,37 +1,38 @@
 package com.cesar.androidtest.recentposts
 
-import com.cesar.androidtest.recentposts.model.RecentPostsService
+import com.cesar.androidtest.recentposts.model.RecentPostsApi
 import org.junit.Before
 import org.junit.Test
+import org.mockito.Mockito
 import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 
 class RecentPostsModelTest {
 
     lateinit var model: RecentPostsModel
-    lateinit var mockService: RecentPostsService
+    lateinit var mockApi: RecentPostsApi
     lateinit var mockPresenter: RecentPostsPresenter
 
     @Before
     fun setUp() {
-        mockService = mock(RecentPostsService::class.java)
+        mockApi = mock(RecentPostsApi::class.java)
         mockPresenter = mock(RecentPostsPresenter::class.java)
         MockitoAnnotations.initMocks(this)
 
-        model = RecentPostsModel(mockService)
+        model = RecentPostsModel(mockApi)
         model.presenter = mockPresenter
     }
 
     @Test
     fun whenRequestListThenCallServiceList() {
         model.requestList()
-        verify(mockService, times(1)).list()
+        verify(mockApi, times(1)).list(callback = any())
     }
 
     @Test
     fun givenRequestListWhenSuccessThenCallPresenterOnSuccess() {
         model.requestList()
-        verify(mockPresenter, times(1)).onRequestListSuccess()
+        verify(mockPresenter, times(1)).onRequestListResponseSuccessful()
     }
 
 }
