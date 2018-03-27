@@ -28,7 +28,7 @@ class RecentPostsPresenterTest {
 
     @Test
     fun givenListRequestedWhenModelReturnsSuccessThenCallViewSuccess() {
-        presenter.onRequestListSuccess()
+        presenter.onRequestListResponseSuccessful()
         verify(mockView, times(1)).onListLoadingComplete()
     }
 

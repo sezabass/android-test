@@ -10,8 +10,15 @@ class RecentPostsPresenter @Inject constructor(
         model.requestList()
     }
 
-    override fun onRequestListSuccess() {
+    override fun onRequestListResponseSuccessful() {
         view.onListLoadingComplete()
     }
 
+    override fun onRequestListResponseNotSuccessful() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onRequestListFailure() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }

@@ -7,7 +7,9 @@ interface RecentPostsContract {
 
     interface Presenter {
         fun onLoad()
-        fun onRequestListSuccess()
+        fun onRequestListResponseSuccessful()
+        fun onRequestListResponseNotSuccessful()
+        fun onRequestListFailure()
     }
 
     interface Model {
