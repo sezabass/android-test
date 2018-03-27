@@ -9,6 +9,10 @@ import org.mockito.MockitoAnnotations
 
 class RecentPostsModelTest {
 
+    // Helper function for Mockito with Kotlin
+    private fun <T> any(): T {Mockito.any<T>();return uninitialized()}
+    private fun <T> uninitialized(): T = null as T
+
     lateinit var model: RecentPostsModel
     lateinit var mockApi: RecentPostsApi
     lateinit var mockPresenter: RecentPostsPresenter
