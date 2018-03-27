@@ -29,10 +29,6 @@ class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View {
         initializeDependencies()
 
         recentPostsPresenter.onLoad()
-
-        // TODO
-        //val recyclerView = posts_list_recyclerview
-        //recyclerView.adapter = PostsListAdapter(recentPosts(), this)
     }
 
 }

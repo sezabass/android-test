@@ -6,9 +6,6 @@ import com.cesar.androidtest.recentposts.model.RecentPostsService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.jackson.JacksonConverterFactory
-import javax.inject.Inject
 
 
 class RecentPostsModel (val service: RecentPostsService
@@ -24,12 +21,10 @@ class RecentPostsModel (val service: RecentPostsService
             override fun onResponse(call: Call<RecentPostModel>?, response: Response<RecentPostModel>?) {
                 response?.body()?.data?.children?.let {
                     Log.v("Retrofit", it[0].data?.title)
-                    //val recentPosts: RecentPostModel = it
                 }
             }
 
             override fun onFailure(call: Call<RecentPostModel>?, t: Throwable?) {
-                //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                 Log.d("Retrofit", "TODO!")
             }
         })
