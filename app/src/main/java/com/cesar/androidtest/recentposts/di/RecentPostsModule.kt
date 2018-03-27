@@ -1,6 +1,7 @@
 package com.cesar.androidtest.recentposts.di
 
 import com.cesar.androidtest.recentposts.RecentPostsActivity
+import com.cesar.androidtest.recentposts.RecentPostsContract
 import com.cesar.androidtest.recentposts.RecentPostsModel
 import com.cesar.androidtest.recentposts.RecentPostsPresenter
 import com.cesar.androidtest.recentposts.model.RecentPostsApi
@@ -27,7 +28,7 @@ class RecentPostsModule(val activity: RecentPostsActivity){
 
     @RecentPostsScope
     @Provides
-    fun recentPostsPresenter(api: RecentPostsApi): RecentPostsPresenter {
+    fun recentPostsPresenter(api: RecentPostsApi): RecentPostsContract.Presenter {
         val model = RecentPostsModel(api)
         val presenter = RecentPostsPresenter(activity, model)
         model.presenter = presenter

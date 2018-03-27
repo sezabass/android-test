@@ -12,7 +12,7 @@ import javax.inject.Inject
 class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View {
 
     @Inject
-    lateinit var recentPostsPresenter: RecentPostsPresenter
+    lateinit var recentPostsPresenter: RecentPostsContract.Presenter
 
     fun initializeDependencies() {
 
