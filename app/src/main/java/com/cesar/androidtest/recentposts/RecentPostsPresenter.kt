@@ -11,7 +11,12 @@ class RecentPostsPresenter @Inject constructor(
         model.requestList()
     }
 
+    override fun onSwipeToRefresh() {
+        model.requestList()
+    }
+
     override fun onRequestListResponseSuccessful(response: List<RecentPostModel>) {
+        view.hideLoading()
         view.onListLoadingComplete(response)
     }
 

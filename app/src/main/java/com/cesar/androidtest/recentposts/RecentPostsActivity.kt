@@ -1,6 +1,7 @@
 package com.cesar.androidtest.recentposts
 
 import android.os.Bundle
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.cesar.androidtest.R
@@ -13,7 +14,8 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_recentposts.*
 import javax.inject.Inject
 
-class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View {
+class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
+        SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
     lateinit var recentPostsPresenter: RecentPostsContract.Presenter
@@ -40,6 +42,8 @@ class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View {
 
         initializeRecyclerView()
 
+        recentPostsSwipeRefreshLayout.setOnRefreshListener(this)
+
         recentPostsPresenter.onLoad()
     }
 
@@ -52,6 +56,14 @@ class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View {
         // Set RecyclerView adapter
         adapter = RecyclerAdapter(postsList, picasso)
         recyclerView.adapter = adapter
+    }
+
+    override fun onRefresh() {
+        recentPostsPresenter.onSwipeToRefresh()
+    }
+
+    override fun hideLoading() {
+        recentPostsSwipeRefreshLayout.isRefreshing = false
     }
 
     override fun onListLoadingComplete(postsListResult: List<RecentPostModel>) {

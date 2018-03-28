@@ -5,10 +5,12 @@ import com.cesar.androidtest.recentposts.model.RecentPostModel
 interface RecentPostsContract {
     interface View {
         fun onListLoadingComplete(postsListResult: List<RecentPostModel>)
+        fun hideLoading()
     }
 
     interface Presenter {
         fun onLoad()
+        fun onSwipeToRefresh()
         fun onRequestListResponseSuccessful(response: List<RecentPostModel>)
         fun onRequestListResponseNotSuccessful()
         fun onRequestListFailure()

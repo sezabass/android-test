@@ -32,8 +32,15 @@ class RecentPostsPresenterTest {
     }
 
     @Test
+    fun whenOnSwipeToRefreshThenRequestListToModel() {
+        presenter.onSwipeToRefresh()
+        verify(mockModel, times(1)).requestList()
+    }
+
+    @Test
     fun givenListRequestedWhenModelReturnsSuccessThenCallViewSuccess() {
         presenter.onRequestListResponseSuccessful(ArrayList())
+        verify(mockView, times(1)).hideLoading()
         verify(mockView, times(1)).onListLoadingComplete(any())
     }
 
