@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import com.cesar.androidtest.R
 import com.cesar.androidtest.recentposts.model.RecentPostModel
 import com.squareup.picasso.Picasso
@@ -49,12 +50,27 @@ class RecyclerAdapter(private val posts: List<RecentPostModel>,
             view.itemAuthor.text = post.data?.author
 
             val imageUrl = post.data?.preview?.images?.get(0)?.source?.url
-            picasso?.load(imageUrl).into(view.itemImage)
-        }
 
-        companion object {
-            private val POST_KEY = "POST"
+            if (imageUrl != null) {
+                picasso.load(imageUrl).into(view.itemImage)
+            } else {
+                // hide image view
+                var imageParams: LinearLayout.LayoutParams =
+                        view.itemImage.layoutParams as LinearLayout.LayoutParams
+                imageParams.weight = 0f
+                view.itemImage.layoutParams = imageParams
+
+                // stretch text
+                var descriptionParams: LinearLayout.LayoutParams =
+                        view.itemDescriptionHolder.layoutParams as LinearLayout.LayoutParams
+                descriptionParams.weight = 3f
+                view.itemDescriptionHolder.layoutParams = descriptionParams
+
+            }
         }
     }
 
+    companion object {
+        private val POST_KEY = "POST"
+    }
 }
