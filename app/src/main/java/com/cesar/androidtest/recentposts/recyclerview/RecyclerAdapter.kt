@@ -46,7 +46,7 @@ class RecyclerAdapter(private val posts: List<RecentPostModel>,
 
             this.post = post
             view.itemDate.text = post.data?.title
-            view.itemDescription.text = post.data?.title
+            view.itemAuthor.text = post.data?.author
 
             val imageUrl = post.data?.preview?.images?.get(0)?.source?.url
             picasso?.load(imageUrl).into(view.itemImage)
