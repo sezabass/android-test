@@ -13,6 +13,7 @@ class Data {
     val children: Array<RecentPostModel>? = null
     val title: String? = null
     val url: String? = null
+    val author: String? = null
     val preview: Preview? = null
 }
 
