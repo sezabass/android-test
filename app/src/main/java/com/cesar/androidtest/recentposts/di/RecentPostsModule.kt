@@ -7,6 +7,7 @@ import com.cesar.androidtest.recentposts.RecentPostsPresenter
 import com.cesar.androidtest.recentposts.model.RecentPostsApi
 import com.cesar.androidtest.recentposts.model.RecentPostsApiImpl
 import com.cesar.androidtest.recentposts.model.RecentPostsService
+import com.squareup.picasso.Picasso
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -22,8 +23,14 @@ class RecentPostsModule(val activity: RecentPostsActivity){
 
     @RecentPostsScope
     @Provides
-    fun RecentPostsApi(service: RecentPostsService): RecentPostsApi {
+    fun recentPostsApi(service: RecentPostsService): RecentPostsApi {
         return RecentPostsApiImpl(service)
+    }
+
+    @RecentPostsScope
+    @Provides
+    fun picasso() : Picasso {
+        return Picasso.Builder(activity).build()
     }
 
     @RecentPostsScope

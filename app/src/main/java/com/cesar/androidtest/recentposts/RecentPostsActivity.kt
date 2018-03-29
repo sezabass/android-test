@@ -19,13 +19,14 @@ class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
 
     @Inject
     lateinit var recentPostsPresenter: RecentPostsContract.Presenter
+    @Inject
+    lateinit var picasso: Picasso
 
     private lateinit var adapter: RecyclerAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
     private var postsList: ArrayList<RecentPostModel> = ArrayList()
-    lateinit var picasso: Picasso
 
-    fun initializeDependencies() {
+    private fun initializeDependencies() {
 
         DaggerRecentPostsComponent.builder()
                 .recentPostsModule(RecentPostsModule(this))
@@ -50,8 +51,6 @@ class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
     private fun initializeRecyclerView() {
         linearLayoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = linearLayoutManager
-
-        picasso = Picasso.Builder(this).build()
 
         // Set RecyclerView adapter
         adapter = RecyclerAdapter(postsList, picasso)
