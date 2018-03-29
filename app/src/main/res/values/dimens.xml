@@ -5,7 +5,7 @@
     <dimen name="card_max_elevation">2dp</dimen>
     <dimen name="card_content_padding">10dp</dimen>
     <dimen name="card_content_padding_bottom">0dp</dimen>
-    <dimen name="default_padding">16dp</dimen>
+    <dimen name="recent_posts_text_to_image_padding">8dp</dimen>
     <dimen name="recent_posts_content_height">90dp</dimen>
     <dimen name="recent_posts_title_text_size">18sp</dimen>
     <dimen name="recent_posts_author_margin">8dp</dimen>

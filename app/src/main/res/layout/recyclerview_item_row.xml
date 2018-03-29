@@ -17,14 +17,12 @@
         card_view:cardMaxElevation="@dimen/card_max_elevation"
         card_view:cardPreventCornerOverlap="true"
         card_view:cardUseCompatPadding="true"
-        card_view:contentPadding="@dimen/card_content_padding"
-        card_view:contentPaddingBottom="@dimen/card_content_padding_bottom">
+        card_view:contentPadding="@dimen/card_content_padding">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="@dimen/default_padding"
             android:weightSum="3">
 
             <LinearLayout
@@ -33,7 +31,7 @@
                 android:layout_height="@dimen/recent_posts_content_height"
                 android:layout_weight="2"
                 android:orientation="vertical"
-                android:paddingRight="@dimen/default_padding"
+                android:paddingRight="@dimen/recent_posts_text_to_image_padding"
                 tools:ignore="RtlHardcoded,RtlSymmetry">
 
                 <TextView
