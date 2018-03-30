@@ -21,7 +21,6 @@ class RecentPostsModelTest {
     fun setUp() {
         mockApi = mock(RecentPostsApi::class.java)
         mockPresenter = mock(RecentPostsPresenter::class.java)
-        MockitoAnnotations.initMocks(this)
 
         model = RecentPostsModel(mockApi)
         model.presenter = mockPresenter
@@ -31,13 +30,6 @@ class RecentPostsModelTest {
     fun whenRequestListThenCallServiceList() {
         model.requestList()
         verify(mockApi, times(1)).list(callback = any())
-    }
-
-    @Test
-    fun givenRequestListWhenSuccessThenCallPresenterOnSuccess() {
-        model.requestList()
-        verify(mockPresenter, times(1)).
-                onRequestListResponseSuccessful(any())
     }
 
 }
