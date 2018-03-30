@@ -4,6 +4,7 @@ import com.cesar.androidtest.recentposts.RecentPostsActivity
 import com.cesar.androidtest.recentposts.di.RecentPostsTestActivityMock
 import com.cesar.androidtest.recentposts.model.Data
 import com.cesar.androidtest.recentposts.model.RecentPostModel
+import junit.framework.Assert.assertFalse
 import kotlinx.android.synthetic.main.activity_recentposts.*
 import org.junit.Before
 import org.junit.Test
@@ -25,7 +26,7 @@ class RecentPostsActivityTest {
 
     private lateinit var activity: RecentPostsActivity
 
-    val sampleList = ArrayList<RecentPostModel>()
+    private val sampleList = ArrayList<RecentPostModel>()
 
     @Before
     fun setUp() {
@@ -49,6 +50,12 @@ class RecentPostsActivityTest {
     fun whenSwipeToRefreshThenRequestPresenterOnSwipeToRefresh() {
         activity.onRefresh()
         verify(activity.recentPostsPresenter, times(1)).onSwipeToRefresh()
+    }
+
+    @Test
+    fun whenHideLoadingThenRecentPostsSwipeRefreshLayoutIsLoadingShouldBeFalse() {
+        activity.hideLoading()
+        assertFalse(activity.recentPostsSwipeRefreshLayout.isRefreshing)
     }
 
     @Test
