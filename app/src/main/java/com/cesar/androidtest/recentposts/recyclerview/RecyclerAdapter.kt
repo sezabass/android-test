@@ -1,16 +1,18 @@
 package com.cesar.androidtest.recentposts.recyclerview
 
+import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.cesar.androidtest.R
+import com.cesar.androidtest.recentposts.RecentPostsActivity
 import com.cesar.androidtest.recentposts.model.RecentPostModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.recyclerview_item_row.view.*
 
-class RecyclerAdapter(private val posts: List<RecentPostModel>,
+class RecyclerAdapter(private val context: Context,
+                      private val posts: List<RecentPostModel>,
                       private val picasso: Picasso) :
         RecyclerView.Adapter<RecyclerAdapter.PostHolder>() {
 
@@ -23,24 +25,20 @@ class RecyclerAdapter(private val posts: List<RecentPostModel>,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.PostHolder {
         val inflatedView = parent.inflate(R.layout.recyclerview_item_row)
-        return PostHolder(inflatedView)
+        return PostHolder(context, inflatedView)
     }
 
-    class PostHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
+    class PostHolder(context: Context, v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
         private var view: View = v
         private var post: RecentPostModel? = null
+        private var context: Context = context
 
         init {
             v.setOnClickListener(this)
         }
 
         override fun onClick(v: View) {
-            Log.d("RecyclerView", "CLICK!")
-//            TODO: for later...
-//            val context = itemView.context
-//            val showPostIntent = Intent(context, PostDetailActivity::class.java)
-//            showPostIntent.putExtra(POST_KEY, post)
-//            context.startActivity(showPostIntent)
+            (this.context as RecentPostsActivity).onPostsListItemClicked(v)
         }
 
         fun bindPost(post: RecentPostModel, picasso: Picasso) {
@@ -68,9 +66,5 @@ class RecyclerAdapter(private val posts: List<RecentPostModel>,
 
             }
         }
-    }
-
-    companion object {
-        private val POST_KEY = "POST"
     }
 }
