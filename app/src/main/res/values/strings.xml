@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Android Test</string>
+    <string name="recent_posts_thumbnail_description">This post\'s thumbnail</string>
 </resources>

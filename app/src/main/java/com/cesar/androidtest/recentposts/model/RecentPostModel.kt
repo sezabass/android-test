@@ -5,20 +5,16 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 //data class RecentPostModel(val data: Data)
 @JsonIgnoreProperties(ignoreUnknown = true)
 class RecentPostModel {
-    val data: Data? = null
-}
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-class Child {
-    val data: Data? = null
+    var data: Data? = null
 }
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 class Data {
-    val children: Array<Child>? = null
-    val title: String? = null
-    val url: String? = null
-    val preview: Preview? = null
+    var children: Array<RecentPostModel>? = null
+    var title: String? = null
+    var url: String? = null
+    var author: String? = null
+    var preview: Preview? = null
 }
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -28,7 +24,13 @@ class Preview {
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 class Images {
+    val source: Source? = null
     val resolutions: Array<Resolutions>? = null
+}
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+class Source {
+    val url: String? = null
 }
 
 @JsonIgnoreProperties(ignoreUnknown = true)
