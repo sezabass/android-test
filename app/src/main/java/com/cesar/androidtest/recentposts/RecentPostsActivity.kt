@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_recentposts.*
 import javax.inject.Inject
 
-class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
+open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
         SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
@@ -26,8 +26,7 @@ class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
     private lateinit var linearLayoutManager: LinearLayoutManager
     private var postsList: ArrayList<RecentPostModel> = ArrayList()
 
-    private fun initializeDependencies() {
-
+    open fun initializeDependencies() {
         DaggerRecentPostsComponent.builder()
                 .recentPostsModule(RecentPostsModule(this))
                 .networkComponent(DaggerNetworkComponent.create())
@@ -39,7 +38,7 @@ class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recentposts)
 
-        initializeDependencies()
+        this.initializeDependencies()
 
         initializeRecyclerView()
 
