@@ -39,9 +39,15 @@ class RecentPostsPresenterTest {
 
     @Test
     fun givenListRequestedWhenModelReturnsSuccessThenCallViewSuccess() {
-        presenter.onRequestListResponseSuccessful(ArrayList())
+        presenter.onRequestListResponseSuccessful(listOf(RecentPostModel()))
         verify(mockView, times(1)).hideLoading()
         verify(mockView, times(1)).onListLoadingComplete(any())
+    }
+
+    @Test
+    fun whenOnPostsListItemClickedThenCallViewShowPostDetails() {
+        presenter.onPostsListItemClicked()
+        verify(mockView).showPostDetails()
     }
 
 }

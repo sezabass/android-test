@@ -27,4 +27,8 @@ class RecentPostsPresenter @Inject constructor(
     override fun onRequestListFailure() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+    override fun onPostsListItemClicked() {
+        view.showPostDetails()
+    }
 }
