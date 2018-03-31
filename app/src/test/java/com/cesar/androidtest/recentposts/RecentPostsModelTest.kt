@@ -3,6 +3,7 @@ package com.cesar.androidtest.recentposts
 import com.cesar.androidtest.recentposts.model.RecentPostsApi
 import org.junit.Before
 import org.junit.Test
+import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
@@ -13,15 +14,15 @@ class RecentPostsModelTest {
     private fun <T> any(): T {Mockito.any<T>();return uninitialized()}
     private fun <T> uninitialized(): T = null as T
 
-    lateinit var model: RecentPostsModel
-    lateinit var mockApi: RecentPostsApi
-    lateinit var mockPresenter: RecentPostsPresenter
+    private lateinit var model: RecentPostsModel
+    @Mock
+    private lateinit var mockApi: RecentPostsApi
+    @Mock
+    private lateinit var mockPresenter: RecentPostsPresenter
 
     @Before
     fun setUp() {
-        mockApi = mock(RecentPostsApi::class.java)
-        mockPresenter = mock(RecentPostsPresenter::class.java)
-
+        MockitoAnnotations.initMocks(this)
         model = RecentPostsModel(mockApi)
         model.presenter = mockPresenter
     }
