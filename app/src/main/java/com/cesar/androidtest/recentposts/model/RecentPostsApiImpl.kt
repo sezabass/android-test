@@ -12,14 +12,16 @@ class RecentPostsApiImpl(val service: RecentPostsService) : RecentPostsApi {
 
     override fun list(callback: RecentPostsApi.ResultListener) {
 
-        val call: Call<RecentPostModel>? = service.list()
-        call?.enqueue(object : Callback<RecentPostModel> {
+        val listCall: Call<RecentPostModel>? = service.list()
 
+        listCall?.enqueue(object : Callback<RecentPostModel> {
             override fun onResponse(call: Call<RecentPostModel>?, response: Response<RecentPostModel>?) {
                 if (response!!.isSuccessful) {
                     response.body()?.data?.children?.let {
                         callback.onResponseSuccessful(it.toMutableList())
+                        return
                     }
+                    callback.onResponseNotSuccessful()
                 } else {
                     callback.onResponseNotSuccessful()
                 }
