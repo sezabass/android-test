@@ -77,7 +77,6 @@ dependencies {
     testImplementation "org.robolectric:robolectric:3.8"
 
     // Dagger
-    testImplementation "com.google.dagger:dagger:$dagger_version"
     kaptTest "com.google.dagger:dagger-compiler:$dagger_version"
     kaptTest "com.google.dagger:dagger-android-processor:$dagger_version"
 }

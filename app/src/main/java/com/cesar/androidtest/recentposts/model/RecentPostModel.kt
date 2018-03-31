@@ -2,7 +2,6 @@ package com.cesar.androidtest.recentposts.model
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
-//data class RecentPostModel(val data: Data)
 @JsonIgnoreProperties(ignoreUnknown = true)
 class RecentPostModel {
     var data: Data? = null

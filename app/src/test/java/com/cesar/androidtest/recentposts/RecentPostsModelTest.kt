@@ -1,35 +1,70 @@
 package com.cesar.androidtest.recentposts
 
+import com.cesar.androidtest.recentposts.model.RecentPostModel
 import com.cesar.androidtest.recentposts.model.RecentPostsApi
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mockito
+import org.mockito.*
 import org.mockito.Mockito.*
-import org.mockito.MockitoAnnotations
 
 class RecentPostsModelTest {
 
     // Helper function for Mockito with Kotlin
     private fun <T> any(): T {Mockito.any<T>();return uninitialized()}
+    @Suppress("UNCHECKED_CAST")
     private fun <T> uninitialized(): T = null as T
 
-    lateinit var model: RecentPostsModel
-    lateinit var mockApi: RecentPostsApi
-    lateinit var mockPresenter: RecentPostsPresenter
+    private lateinit var model: RecentPostsModel
+    @Mock
+    private lateinit var mockApi: RecentPostsApi
+    @Mock
+    private lateinit var mockPresenter: RecentPostsPresenter
+    @Captor
+    private lateinit var resultListenerArgumentCaptor: ArgumentCaptor<RecentPostsApi.ResultListener>
 
     @Before
     fun setUp() {
-        mockApi = mock(RecentPostsApi::class.java)
-        mockPresenter = mock(RecentPostsPresenter::class.java)
-
+        MockitoAnnotations.initMocks(this)
         model = RecentPostsModel(mockApi)
         model.presenter = mockPresenter
     }
 
     @Test
-    fun whenRequestListThenCallServiceList() {
+    fun whenRequestListThenCallApiList() {
         model.requestList()
-        verify(mockApi, times(1)).list(callback = any())
+        verify(mockApi).list(callback = any())
+    }
+
+    @Test
+    fun givenListRequestedWhenResponseSuccessfulThenCallPresenterRequestListResponseSuccessful() {
+        val anyList = listOf(RecentPostModel())
+        model.requestList()
+
+        verify(mockApi).list(resultListenerArgumentCaptor.capture())
+        resultListenerArgumentCaptor.value.onResponseSuccessful(anyList)
+
+        verify(mockPresenter).onRequestListResponseSuccessful(anyList)
+    }
+
+    @Test
+    fun givenListRequestedWhenResponseNotSuccessfulThenCallPresenterRequestListResponseNotSuccessful() {
+        model.requestList()
+
+        verify(mockApi).list(resultListenerArgumentCaptor.capture())
+        resultListenerArgumentCaptor.value.onResponseNotSuccessful()
+
+        verify(mockPresenter).onRequestListResponseNotSuccessful()
+    }
+
+    @Test
+    fun givenListRequestedWhenFailureThenCallPresenterRequestListFailure() {
+        val anyString = "Some error message"
+        model.requestList()
+
+        verify(mockApi).list(resultListenerArgumentCaptor.capture())
+        resultListenerArgumentCaptor.value.onFailure(anyString)
+
+        verify(mockPresenter).onRequestListFailure()
     }
 
 }

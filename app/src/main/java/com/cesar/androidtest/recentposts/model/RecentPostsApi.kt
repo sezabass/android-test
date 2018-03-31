@@ -1,7 +1,7 @@
 package com.cesar.androidtest.recentposts.model
 
 interface RecentPostsApi {
-    fun list(callback: ResultListener)
+    fun list(callback: ResultListener?)
 
     interface ResultListener {
         fun onResponseSuccessful(response: List<RecentPostModel>)
