@@ -27,7 +27,7 @@ class RecentPostsModelTest {
     }
 
     @Test
-    fun whenRequestListThenCallServiceList() {
+    fun whenRequestListThenCallApiList() {
         model.requestList()
         verify(mockApi, times(1)).list(callback = any())
     }
