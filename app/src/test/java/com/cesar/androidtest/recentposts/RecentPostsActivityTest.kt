@@ -1,6 +1,6 @@
-package com.cesar.androidtest
+package com.cesar.androidtest.recentposts
 
-import com.cesar.androidtest.recentposts.RecentPostsActivity
+import com.cesar.androidtest.BuildConfig
 import com.cesar.androidtest.recentposts.di.RecentPostsTestActivityMock
 import com.cesar.androidtest.recentposts.model.Data
 import com.cesar.androidtest.recentposts.model.RecentPostModel
