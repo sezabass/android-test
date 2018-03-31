@@ -46,4 +46,25 @@ class RecentPostsModelTest {
         verify(mockPresenter).onRequestListResponseSuccessful(anyList)
     }
 
+    @Test
+    fun givenListRequestedWhenResponseNotSuccessfulThenCallPresenterRequestListResponseNotSuccessful() {
+        model.requestList()
+
+        verify(mockApi).list(resultListenerArgumentCaptor.capture())
+        resultListenerArgumentCaptor.value.onResponseNotSuccessful()
+
+        verify(mockPresenter).onRequestListResponseNotSuccessful()
+    }
+
+    @Test
+    fun givenListRequestedWhenFailureThenCallPresenterRequestListFailure() {
+        val anyString = "Some error message"
+        model.requestList()
+
+        verify(mockApi).list(resultListenerArgumentCaptor.capture())
+        resultListenerArgumentCaptor.value.onFailure(anyString)
+
+        verify(mockPresenter).onRequestListFailure()
+    }
+
 }
