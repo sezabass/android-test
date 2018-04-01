@@ -8,16 +8,25 @@ class RecentPostsPresenter @Inject constructor(
         RecentPostsContract.Presenter {
 
     override fun onLoad() {
-        model.requestList()
+        model.requestList(null)
+    }
+
+    override fun requestMoreItems(lastName: String?) {
+        model.requestList(lastName)
     }
 
     override fun onSwipeToRefresh() {
-        model.requestList()
+        model.requestList(null)
     }
 
-    override fun onRequestListResponseSuccessful(response: List<RecentPostModel>) {
+    override fun onReplaceListResponseSuccessful(response: List<RecentPostModel>) {
         view.hideLoading()
         view.onListLoadingComplete(response)
+    }
+
+    override fun onAddToListResponseSuccessful(response: List<RecentPostModel>) {
+        view.hideLoading()
+        view.onListAddingComplete(response)
     }
 
     override fun onRequestListResponseNotSuccessful() {

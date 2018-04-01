@@ -5,17 +5,19 @@ import com.nhaarman.mockito_kotlin.verify
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito
-import org.mockito.Mockito.times
 
 class RecentPostsPresenterTest {
 
     // Helper function for Mockito with Kotlin
     private fun <T> any(): T {Mockito.any<T>();return uninitialized()}
+    @Suppress("UNCHECKED_CAST")
     private fun <T> uninitialized(): T = null as T
 
     lateinit var mockView: RecentPostsContract.View
     lateinit var mockModel: RecentPostsContract.Model
     lateinit var presenter: RecentPostsContract.Presenter
+
+    private val lastItemSample: String = "lastItemSample"
 
     @Before
     fun setUp() {
@@ -28,20 +30,27 @@ class RecentPostsPresenterTest {
     @Test
     fun whenOnLoadThenRequestListToModel() {
         presenter.onLoad()
-        verify(mockModel, times(1)).requestList()
+        verify(mockModel).requestList(null)
     }
 
     @Test
     fun whenOnSwipeToRefreshThenRequestListToModel() {
         presenter.onSwipeToRefresh()
-        verify(mockModel, times(1)).requestList()
+        verify(mockModel).requestList(null)
     }
 
     @Test
-    fun givenListRequestedWhenModelReturnsSuccessThenCallViewSuccess() {
-        presenter.onRequestListResponseSuccessful(listOf(RecentPostModel()))
-        verify(mockView, times(1)).hideLoading()
-        verify(mockView, times(1)).onListLoadingComplete(any())
+    fun givenListRequestedWhenModelReturnsReplaceSuccessThenCallViewSuccess() {
+        presenter.onReplaceListResponseSuccessful(listOf(RecentPostModel()))
+        verify(mockView).hideLoading()
+        verify(mockView).onListLoadingComplete(any())
+    }
+
+    @Test
+    fun givenListRequestedWhenModelReturnsAddSuccessThenCallViewSuccess() {
+        presenter.onAddToListResponseSuccessful(listOf(RecentPostModel()))
+        verify(mockView).hideLoading()
+        verify(mockView).onListAddingComplete(any())
     }
 
     @Test
@@ -50,4 +59,9 @@ class RecentPostsPresenterTest {
         verify(mockView).showPostDetails()
     }
 
+    @Test
+    fun whenRequestMoreItemsThenCallModelRequestList() {
+        presenter.requestMoreItems(lastItemSample)
+        verify(mockModel).requestList(lastItemSample)
+    }
 }
