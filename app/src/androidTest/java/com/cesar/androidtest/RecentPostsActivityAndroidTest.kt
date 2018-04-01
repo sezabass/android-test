@@ -52,4 +52,9 @@ class RecentPostsActivityAndroidTest {
     fun ensureRecyclerViewIsVisible() {
         onView(withId(R.id.recyclerView)).check(matches(isDisplayed()))
     }
+
+    //TODO: fun ensureRecyclerViewItemsAreProperlyLoaded() {} --> via MockWebServer
+    //TODO: fun ensureRecyclerViewItemsAreClickable() {}
+    //TODO: fun ensureRecyclerViewItemsClickWouldTakeToDetailsActivity() {}
+
 }

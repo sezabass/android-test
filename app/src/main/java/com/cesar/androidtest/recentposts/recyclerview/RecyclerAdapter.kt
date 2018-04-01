@@ -28,10 +28,9 @@ class RecyclerAdapter(private val context: Context,
         return PostHolder(context, inflatedView)
     }
 
-    class PostHolder(context: Context, v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
+    class PostHolder(private var context: Context, v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
         private var view: View = v
         private var post: RecentPostModel? = null
-        private var context: Context = context
 
         init {
             v.setOnClickListener(this)
@@ -44,7 +43,7 @@ class RecyclerAdapter(private val context: Context,
         fun bindPost(post: RecentPostModel, picasso: Picasso) {
 
             this.post = post
-            view.itemDate.text = post.data?.title
+            view.itemTitle.text = post.data?.title
             view.itemAuthor.text = post.data?.author
 
             val imageUrl = post.data?.preview?.images?.get(0)?.source?.url
@@ -53,13 +52,13 @@ class RecyclerAdapter(private val context: Context,
                 picasso.load(imageUrl).into(view.itemImage)
             } else {
                 // hide image view
-                var imageParams: LinearLayout.LayoutParams =
+                val imageParams: LinearLayout.LayoutParams =
                         view.itemImage.layoutParams as LinearLayout.LayoutParams
                 imageParams.weight = 0f
                 view.itemImage.layoutParams = imageParams
 
                 // stretch text
-                var descriptionParams: LinearLayout.LayoutParams =
+                val descriptionParams: LinearLayout.LayoutParams =
                         view.itemDescriptionHolder.layoutParams as LinearLayout.LayoutParams
                 descriptionParams.weight = 3f
                 view.itemDescriptionHolder.layoutParams = descriptionParams
