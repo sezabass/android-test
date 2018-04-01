@@ -5,8 +5,8 @@ import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.UiController
 import android.support.test.espresso.ViewAction
 import android.support.test.espresso.action.ViewActions
-import android.support.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast
-import android.support.test.espresso.matcher.ViewMatchers.withId
+import android.support.test.espresso.assertion.ViewAssertions.matches
+import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import android.view.View
@@ -34,12 +34,12 @@ class RecentPostsActivityAndroidTest {
     @Test
     fun ensureSwipeDownWillRefresh() {
         onView(withId(R.id.recentPostsSwipeRefreshLayout))
-                .perform(withCustomConstraints(
+                .perform(swipeDownCustomConstraints(
                         ViewActions.swipeDown(), isDisplayingAtLeast(85)
                 ))
     }
 
-    private fun withCustomConstraints(action: ViewAction, constraints: Matcher<View>): ViewAction {
+    private fun swipeDownCustomConstraints(action: ViewAction, constraints: Matcher<View>): ViewAction {
         return object : ViewAction {
             override fun getConstraints(): Matcher<View> = constraints
             override fun getDescription(): String = action.description
@@ -48,4 +48,8 @@ class RecentPostsActivityAndroidTest {
         }
     }
 
+    @Test
+    fun ensureRecyclerViewIsVisible() {
+        onView(withId(R.id.recyclerView)).check(matches(isDisplayed()))
+    }
 }
