@@ -30,8 +30,8 @@ class RecentPostsActivityTest {
 
     @Before
     fun setUp() {
-        var samplePost = RecentPostModel()
-        var sampleData = Data()
+        val samplePost = RecentPostModel()
+        val sampleData = Data()
         sampleData.author = "Sample Author"
         sampleData.title = "Sample Title"
         sampleData.url = "http://www.pudim.com.br"
@@ -43,13 +43,13 @@ class RecentPostsActivityTest {
 
     @Test
     fun whenLoadActivityThenRequestPostsList() {
-        verify(activity.recentPostsPresenter, times(1)).onLoad()
+        verify(activity.presenter, times(1)).onLoad()
     }
 
     @Test
     fun whenSwipeToRefreshThenRequestPresenterOnSwipeToRefresh() {
         activity.onRefresh()
-        verify(activity.recentPostsPresenter, times(1)).onSwipeToRefresh()
+        verify(activity.presenter, times(1)).onSwipeToRefresh()
     }
 
     @Test
@@ -69,6 +69,6 @@ class RecentPostsActivityTest {
         recyclerView.layout(0, 0, 100, 1000)
         recyclerView.findViewHolderForAdapterPosition(0).itemView.performClick()
 
-        verify(activity.recentPostsPresenter).onPostsListItemClicked()
+        verify(activity.presenter).onPostsListItemClicked()
     }
 }

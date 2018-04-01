@@ -20,7 +20,7 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
         SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
-    lateinit var recentPostsPresenter: RecentPostsContract.Presenter
+    lateinit var presenter: RecentPostsContract.Presenter
     @Inject
     lateinit var picasso: Picasso
 
@@ -46,7 +46,7 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
 
         recentPostsSwipeRefreshLayout.setOnRefreshListener(this)
 
-        recentPostsPresenter.onLoad()
+        presenter.onLoad()
     }
 
     private fun initializeRecyclerView() {
@@ -58,7 +58,7 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
     }
 
     override fun onRefresh() {
-        recentPostsPresenter.onSwipeToRefresh()
+        presenter.onSwipeToRefresh()
     }
 
     override fun hideLoading() {
@@ -74,7 +74,7 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
     }
 
     override fun onPostsListItemClicked(listItem: View) {
-        recentPostsPresenter.onPostsListItemClicked()
+        presenter.onPostsListItemClicked()
     }
     override fun showPostDetails() {
         Log.v("RecentPostsActivity", "Post details requested!")
