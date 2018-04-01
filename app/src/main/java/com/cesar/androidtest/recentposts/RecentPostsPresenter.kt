@@ -19,9 +19,14 @@ class RecentPostsPresenter @Inject constructor(
         model.requestList(null)
     }
 
-    override fun onRequestListResponseSuccessful(response: List<RecentPostModel>) {
+    override fun onReplaceListResponseSuccessful(response: List<RecentPostModel>) {
         view.hideLoading()
         view.onListLoadingComplete(response)
+    }
+
+    override fun onAddToListResponseSuccessful(response: List<RecentPostModel>) {
+        view.hideLoading()
+        view.onListAddingComplete(response)
     }
 
     override fun onRequestListResponseNotSuccessful() {

@@ -8,11 +8,15 @@ class RecentPostsModel(val api: RecentPostsApi) : RecentPostsContract.Model {
 
     var presenter: RecentPostsContract.Presenter? = null
 
-    override fun requestList(lastItem : String?) {
+    override fun requestList(lastViewed: String?) {
 
-        api.list(lastItem, object : RecentPostsApi.ResultListener {
+        api.list(lastViewed, object : RecentPostsApi.ResultListener {
             override fun onResponseSuccessful(response: List<RecentPostModel>) {
-                presenter?.onRequestListResponseSuccessful(response)
+                if (lastViewed == null) {
+                    presenter?.onReplaceListResponseSuccessful(response)
+                } else {
+                    presenter?.onAddToListResponseSuccessful(response)
+                }
             }
 
             override fun onResponseNotSuccessful() {

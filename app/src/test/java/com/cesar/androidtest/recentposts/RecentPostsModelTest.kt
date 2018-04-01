@@ -2,6 +2,7 @@ package com.cesar.androidtest.recentposts
 
 import com.cesar.androidtest.recentposts.model.RecentPostModel
 import com.cesar.androidtest.recentposts.model.RecentPostsApi
+import com.nhaarman.mockito_kotlin.isNull
 import org.junit.Before
 import org.junit.Test
 import org.mockito.*
@@ -39,14 +40,25 @@ class RecentPostsModelTest {
     }
 
     @Test
-    fun givenListRequestedWhenResponseSuccessfulThenCallPresenterRequestListResponseSuccessful() {
+    fun givenListRequestedWithLastViewedWhenResponseSuccessfulThenCallPresenterAddToListResponseSuccessful() {
         val anyList = listOf(RecentPostModel())
         model.requestList(lastItemSample)
 
         verify(mockApi).list(same(lastItemSample), resultListenerArgumentCaptor.capture())
         resultListenerArgumentCaptor.value.onResponseSuccessful(anyList)
 
-        verify(mockPresenter).onRequestListResponseSuccessful(anyList)
+        verify(mockPresenter).onAddToListResponseSuccessful(anyList)
+    }
+
+    @Test
+    fun givenListRequestedWithoutLastViewedWhenResponseSuccessfulThenCallPresenterReplaceListResponseSuccessful() {
+        val anyList = listOf(RecentPostModel())
+        model.requestList(null)
+
+        verify(mockApi).list(isNull(), resultListenerArgumentCaptor.capture())
+        resultListenerArgumentCaptor.value.onResponseSuccessful(anyList)
+
+        verify(mockPresenter).onReplaceListResponseSuccessful(anyList)
     }
 
     @Test

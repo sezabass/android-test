@@ -92,6 +92,12 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
             adapter.notifyDataSetChanged()
         }
     }
+    override fun onListAddingComplete(response: List<RecentPostModel>) {
+        runOnUiThread {
+            postsList.addAll(response)
+            adapter.notifyDataSetChanged()
+        }
+    }
 
     override fun onPostsListItemClicked(listItem: View) {
         presenter.onPostsListItemClicked()

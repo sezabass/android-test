@@ -4,9 +4,7 @@ import com.cesar.androidtest.recentposts.model.RecentPostModel
 import com.nhaarman.mockito_kotlin.verify
 import org.junit.Before
 import org.junit.Test
-import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mockito
-import org.mockito.Mockito.times
 
 class RecentPostsPresenterTest {
 
@@ -42,10 +40,17 @@ class RecentPostsPresenterTest {
     }
 
     @Test
-    fun givenListRequestedWhenModelReturnsSuccessThenCallViewSuccess() {
-        presenter.onRequestListResponseSuccessful(listOf(RecentPostModel()))
-        verify(mockView, times(1)).hideLoading()
-        verify(mockView, times(1)).onListLoadingComplete(any())
+    fun givenListRequestedWhenModelReturnsReplaceSuccessThenCallViewSuccess() {
+        presenter.onReplaceListResponseSuccessful(listOf(RecentPostModel()))
+        verify(mockView).hideLoading()
+        verify(mockView).onListLoadingComplete(any())
+    }
+
+    @Test
+    fun givenListRequestedWhenModelReturnsAddSuccessThenCallViewSuccess() {
+        presenter.onAddToListResponseSuccessful(listOf(RecentPostModel()))
+        verify(mockView).hideLoading()
+        verify(mockView).onListAddingComplete(any())
     }
 
     @Test

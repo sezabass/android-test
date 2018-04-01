@@ -59,8 +59,21 @@ class RecentPostsActivityTest {
     }
 
     @Test
-    fun whenOnListItemClickedThenCallPresenter() {
+    fun givenListLoadingCompleteWhenItemClickedThenCallPresenter() {
         activity.onListLoadingComplete(sampleList)
+
+        val recyclerView = activity.recyclerView
+        // workaround robolectric recyclerView issue
+        recyclerView.measure(0, 0)
+        recyclerView.layout(0, 0, 100, 1000)
+        recyclerView.findViewHolderForAdapterPosition(0).itemView.performClick()
+
+        verify(activity.presenter).onPostsListItemClicked()
+    }
+
+    @Test
+    fun givenListAddingCompleteWhenItemClickedThenCallPresenter() {
+        activity.onListAddingComplete(sampleList)
 
         val recyclerView = activity.recyclerView
         // workaround robolectric recyclerView issue
