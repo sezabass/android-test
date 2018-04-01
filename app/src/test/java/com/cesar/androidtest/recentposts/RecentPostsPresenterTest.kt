@@ -11,6 +11,7 @@ class RecentPostsPresenterTest {
 
     // Helper function for Mockito with Kotlin
     private fun <T> any(): T {Mockito.any<T>();return uninitialized()}
+    @Suppress("UNCHECKED_CAST")
     private fun <T> uninitialized(): T = null as T
 
     lateinit var mockView: RecentPostsContract.View
@@ -50,4 +51,9 @@ class RecentPostsPresenterTest {
         verify(mockView).showPostDetails()
     }
 
+    @Test
+    fun whenRequestMoreItemsThenCallModelRequestList() {
+        presenter.requestMoreItems()
+        verify(mockModel).requestList()
+    }
 }

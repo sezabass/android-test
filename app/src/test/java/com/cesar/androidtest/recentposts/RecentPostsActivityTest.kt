@@ -59,7 +59,6 @@ class RecentPostsActivityTest {
     }
 
     @Test
-    @Throws(Exception::class)
     fun whenOnListItemClickedThenCallPresenter() {
         activity.onListLoadingComplete(sampleList)
 
@@ -71,4 +70,11 @@ class RecentPostsActivityTest {
 
         verify(activity.presenter).onPostsListItemClicked()
     }
+
+    @Test
+    fun whenRequestNextDataFromApiThenPresenterRequestMoreItems() {
+        activity.loadNextDataFromApi(1)
+        verify(activity.presenter).requestMoreItems()
+    }
+
 }

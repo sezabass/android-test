@@ -11,6 +11,10 @@ class RecentPostsPresenter @Inject constructor(
         model.requestList()
     }
 
+    override fun requestMoreItems() {
+        model.requestList()
+    }
+
     override fun onSwipeToRefresh() {
         model.requestList()
     }
