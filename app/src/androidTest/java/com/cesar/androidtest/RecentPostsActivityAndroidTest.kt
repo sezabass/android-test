@@ -1,24 +1,51 @@
 package com.cesar.androidtest
 
 import android.support.test.InstrumentationRegistry
+import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.UiController
+import android.support.test.espresso.ViewAction
+import android.support.test.espresso.action.ViewActions
+import android.support.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast
+import android.support.test.espresso.matcher.ViewMatchers.withId
+import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
-
+import android.view.View
+import com.cesar.androidtest.recentposts.RecentPostsActivity
+import org.hamcrest.Matcher
+import org.junit.Assert.assertEquals
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import org.junit.Assert.*
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
 @RunWith(AndroidJUnit4::class)
 class RecentPostsActivityAndroidTest {
+
+    @get:Rule
+    var activityRule = ActivityTestRule<RecentPostsActivity>(RecentPostsActivity::class.java)
+
     @Test
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
         assertEquals("com.cesar.androidtest", appContext.packageName)
     }
+
+    @Test
+    fun ensureSwipeDownWillRefresh() {
+        onView(withId(R.id.recentPostsSwipeRefreshLayout))
+                .perform(withCustomConstraints(
+                        ViewActions.swipeDown(), isDisplayingAtLeast(85)
+                ))
+    }
+
+    private fun withCustomConstraints(action: ViewAction, constraints: Matcher<View>): ViewAction {
+        return object : ViewAction {
+            override fun getConstraints(): Matcher<View> = constraints
+            override fun getDescription(): String = action.description
+            override fun perform(uiController: UiController, view: View) =
+                    action.perform(uiController, view)
+        }
+    }
+
 }
