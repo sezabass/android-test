@@ -4,6 +4,7 @@ import com.cesar.androidtest.recentposts.model.RecentPostModel
 import com.nhaarman.mockito_kotlin.verify
 import org.junit.Before
 import org.junit.Test
+import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mockito
 import org.mockito.Mockito.times
 
@@ -18,6 +19,8 @@ class RecentPostsPresenterTest {
     lateinit var mockModel: RecentPostsContract.Model
     lateinit var presenter: RecentPostsContract.Presenter
 
+    private val lastItemSample: String = "lastItemSample"
+
     @Before
     fun setUp() {
         mockView = Mockito.mock(RecentPostsContract.View::class.java)
@@ -29,13 +32,13 @@ class RecentPostsPresenterTest {
     @Test
     fun whenOnLoadThenRequestListToModel() {
         presenter.onLoad()
-        verify(mockModel, times(1)).requestList()
+        verify(mockModel).requestList(null)
     }
 
     @Test
     fun whenOnSwipeToRefreshThenRequestListToModel() {
         presenter.onSwipeToRefresh()
-        verify(mockModel, times(1)).requestList()
+        verify(mockModel).requestList(null)
     }
 
     @Test
@@ -53,7 +56,7 @@ class RecentPostsPresenterTest {
 
     @Test
     fun whenRequestMoreItemsThenCallModelRequestList() {
-        presenter.requestMoreItems()
-        verify(mockModel).requestList()
+        presenter.requestMoreItems(lastItemSample)
+        verify(mockModel).requestList(lastItemSample)
     }
 }

@@ -9,6 +9,8 @@ class RecentPostModel {
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 class Data {
+    var after: String? = null
+    var name: String? = null
     var children: Array<RecentPostModel>? = null
     var title: String? = null
     var url: String? = null

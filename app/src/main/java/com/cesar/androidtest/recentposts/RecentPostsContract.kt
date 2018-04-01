@@ -12,7 +12,7 @@ interface RecentPostsContract {
 
     interface Presenter {
         fun onLoad()
-        fun requestMoreItems()
+        fun requestMoreItems(lastName: String?)
         fun onSwipeToRefresh()
         fun onRequestListResponseSuccessful(response: List<RecentPostModel>)
         fun onRequestListResponseNotSuccessful()
@@ -21,6 +21,6 @@ interface RecentPostsContract {
     }
 
     interface Model {
-        fun requestList()
+        fun requestList(lastItem: String?)
     }
 }

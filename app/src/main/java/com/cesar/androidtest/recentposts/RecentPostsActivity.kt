@@ -61,14 +61,18 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
 
         scrollListener = object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
-                loadNextDataFromApi(page)
+                loadNextDataFromApi()
             }
         }
         recyclerView.addOnScrollListener(scrollListener)
     }
 
-    fun loadNextDataFromApi(page: Int) {
-        presenter.requestMoreItems()
+    fun loadNextDataFromApi() {
+        var lastName: String? = null
+        if (!postsList.isEmpty()) {
+            lastName = postsList.last().data?.name
+        }
+        presenter.requestMoreItems(lastName)
         // TODO: Append the new data objects to the existing set of items inside the array of items
         // TODO: Notify the adapter of the new items made with `notifyItemRangeInserted()`
     }

@@ -8,15 +8,15 @@ class RecentPostsPresenter @Inject constructor(
         RecentPostsContract.Presenter {
 
     override fun onLoad() {
-        model.requestList()
+        model.requestList(null)
     }
 
-    override fun requestMoreItems() {
-        model.requestList()
+    override fun requestMoreItems(lastName: String?) {
+        model.requestList(lastName)
     }
 
     override fun onSwipeToRefresh() {
-        model.requestList()
+        model.requestList(null)
     }
 
     override fun onRequestListResponseSuccessful(response: List<RecentPostModel>) {

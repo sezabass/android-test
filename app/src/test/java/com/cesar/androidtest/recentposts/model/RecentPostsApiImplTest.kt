@@ -5,8 +5,7 @@ import okhttp3.ResponseBody
 import org.junit.Before
 import org.junit.Test
 import org.mockito.*
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.verify
+import org.mockito.Mockito.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,6 +22,7 @@ class RecentPostsApiImplTest {
     private lateinit var mockListCall: Call<RecentPostModel>
     private val sampleList = arrayOf(RecentPostModel())
     private val sampleRoot = RecentPostModel()
+    private val sampleName: String = "sampleName"
     @Captor
     private lateinit var callbackArgumentCaptor: ArgumentCaptor<Callback<RecentPostModel>>
 
@@ -32,6 +32,7 @@ class RecentPostsApiImplTest {
         sampleData.author = "Sample Author"
         sampleData.title = "Sample Title"
         sampleData.url = "http://www.pudim.com.br"
+        sampleData.after = sampleName
         samplePost.data = sampleData
         sampleList[0] = samplePost
         val sampleRootData = Data()
@@ -48,8 +49,9 @@ class RecentPostsApiImplTest {
 
     @Test
     fun whenApiListThenCallServiceList() {
-        api.list(mockListener)
-        verify(mockService).list()
+        api.list(sampleName, mockListener)
+        verify(mockService).list(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt(),
+                same(sampleName))
     }
 
     @Test
@@ -57,8 +59,9 @@ class RecentPostsApiImplTest {
         val response: Response<RecentPostModel> =
                 Response.success(sampleRoot)
 
-        `when`(mockService.list()).thenReturn(mockListCall)
-        api.list(mockListener)
+        `when`(mockService.list(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt(),
+                same(sampleName))).thenReturn(mockListCall)
+        api.list(sampleName, mockListener)
         verify(mockListCall).enqueue(callbackArgumentCaptor.capture())
         callbackArgumentCaptor.value.onResponse(mockListCall, response)
 
@@ -70,8 +73,9 @@ class RecentPostsApiImplTest {
         val response: Response<RecentPostModel> =
                 Response.success(null)
 
-        `when`(mockService.list()).thenReturn(mockListCall)
-        api.list(mockListener)
+        `when`(mockService.list(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt(),
+                same(sampleName))).thenReturn(mockListCall)
+        api.list(sampleName, mockListener)
         verify(mockListCall).enqueue(callbackArgumentCaptor.capture())
         callbackArgumentCaptor.value.onResponse(mockListCall, response)
 
@@ -86,8 +90,9 @@ class RecentPostsApiImplTest {
                         "\"{\\\"sampleKey\\\":[\\\"sampleValue\\\"]}\"")
                 )
 
-        `when`(mockService.list()).thenReturn(mockListCall)
-        api.list(mockListener)
+        `when`(mockService.list(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt(),
+                same(sampleName))).thenReturn(mockListCall)
+        api.list(sampleName, mockListener)
         verify(mockListCall).enqueue(callbackArgumentCaptor.capture())
         callbackArgumentCaptor.value.onResponse(mockListCall, response)
 
@@ -97,8 +102,9 @@ class RecentPostsApiImplTest {
     @Test
     fun whenApiListFailureThenCallbackFailure() {
         val message = "Some error message"
-        `when`(mockService.list()).thenReturn(mockListCall)
-        api.list(mockListener)
+        `when`(mockService.list(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt(),
+                same(sampleName))).thenReturn(mockListCall)
+        api.list(sampleName, mockListener)
         verify(mockListCall).enqueue(callbackArgumentCaptor.capture())
         callbackArgumentCaptor.value.onFailure(mockListCall, Throwable(message))
 

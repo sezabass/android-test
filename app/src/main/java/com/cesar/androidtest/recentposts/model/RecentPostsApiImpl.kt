@@ -8,11 +8,16 @@ class RecentPostsApiImpl(val service: RecentPostsService) : RecentPostsApi {
 
     companion object {
         val TAG = "API-RecentPosts"
+        val pageSize = 10
     }
 
-    override fun list(callback: RecentPostsApi.ResultListener?) {
+    override fun list(lastViewed: String?, callback: RecentPostsApi.ResultListener?) {
 
-        val listCall: Call<RecentPostModel>? = service.list()
+        val listCall: Call<RecentPostModel>? = service.list(
+                limit = pageSize,
+                count = pageSize,
+                after = lastViewed
+        )
 
         listCall?.enqueue(object : Callback<RecentPostModel> {
             override fun onResponse(call: Call<RecentPostModel>?, response: Response<RecentPostModel>?) {

@@ -9,8 +9,8 @@ import kotlinx.android.synthetic.main.activity_recentposts.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.times
-import org.mockito.Mockito.verify
+import org.mockito.ArgumentMatchers
+import org.mockito.Mockito.*
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
@@ -73,8 +73,8 @@ class RecentPostsActivityTest {
 
     @Test
     fun whenRequestNextDataFromApiThenPresenterRequestMoreItems() {
-        activity.loadNextDataFromApi(1)
-        verify(activity.presenter).requestMoreItems()
+        activity.loadNextDataFromApi()
+        verify(activity.presenter).requestMoreItems(null)
     }
 
 }

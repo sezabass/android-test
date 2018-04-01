@@ -8,9 +8,9 @@ class RecentPostsModel(val api: RecentPostsApi) : RecentPostsContract.Model {
 
     var presenter: RecentPostsContract.Presenter? = null
 
-    override fun requestList() {
+    override fun requestList(lastItem : String?) {
 
-        api.list(object : RecentPostsApi.ResultListener {
+        api.list(lastItem, object : RecentPostsApi.ResultListener {
             override fun onResponseSuccessful(response: List<RecentPostModel>) {
                 presenter?.onRequestListResponseSuccessful(response)
             }
