@@ -1,6 +1,7 @@
 package com.cesar.androidtest.recentposts
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -108,11 +109,21 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
     }
 
     override fun onRequestListResponseNotSuccessful() {
-        //TODO
+        val snackbar: Snackbar = Snackbar.make(
+                recentPostsLayout, MESSAGE_REQUEST_NOT_SUCCESSFUL, Snackbar.LENGTH_SHORT)
+        snackbar.show()
     }
 
     override fun onRequestListFailure() {
-        //TODO
+        val snackbar: Snackbar = Snackbar.make(
+                recentPostsLayout, MESSAGE_REQUEST_FAILURE, Snackbar.LENGTH_SHORT)
+        snackbar.show()
+    }
+
+    companion object {
+        const val TAG = "RecentPostsActivity"
+        const val MESSAGE_REQUEST_NOT_SUCCESSFUL = "Erro ao receber posts"
+        const val MESSAGE_REQUEST_FAILURE = "Não foi possível receber posts. Verifique sua conexão"
     }
 }
 
