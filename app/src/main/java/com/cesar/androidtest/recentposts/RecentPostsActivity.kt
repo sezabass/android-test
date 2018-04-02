@@ -109,6 +109,7 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
         val postId = post?.data?.id
         val postTitle = post?.data?.title
         val postImage = post?.imageUrl()
+        val postUrl = post?.data?.url
         Log.v(TAG, "Post details on $postId requested!")
 
         val postDetailsIntent = Intent(this, PostDetailsActivity::class.java)
@@ -116,6 +117,9 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
         postDetailsIntent.putExtra(KEY_POST_TITLE, postTitle)
         if (postImage != null) {
             postDetailsIntent.putExtra(KEY_POST_IMAGE, postImage)
+        }
+        if (postUrl != null) {
+            postDetailsIntent.putExtra(KEY_POST_URL, postUrl)
         }
         this.startActivity(postDetailsIntent)
     }
@@ -144,6 +148,7 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
         const val KEY_POST_ID = "POST_ID"
         const val KEY_POST_TITLE= "POST_TITLE"
         const val KEY_POST_IMAGE = "POST_IMAGE"
+        const val KEY_POST_URL = "POST_URL"
     }
 }
 

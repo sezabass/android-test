@@ -1,7 +1,9 @@
 package com.cesar.androidtest.postdetails
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.support.customtabs.CustomTabsIntent
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
@@ -26,6 +28,7 @@ open class PostDetailsActivity : AppCompatActivity(), PostDetailsContract.View {
     private lateinit var postId: String
     private lateinit var postTitle: String
     private var postImageUrl: String? = null
+    private var postUrl: String? = null
 
     private lateinit var adapter: PostDetailsRecyclerAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
@@ -41,6 +44,10 @@ open class PostDetailsActivity : AppCompatActivity(), PostDetailsContract.View {
 
         if (intent.hasExtra(RecentPostsActivity.KEY_POST_IMAGE)) {
             postImageUrl = intent.extras.getString(RecentPostsActivity.KEY_POST_IMAGE)
+        }
+
+        if (intent.hasExtra(RecentPostsActivity.KEY_POST_URL)) {
+            postUrl = intent.extras.getString(RecentPostsActivity.KEY_POST_URL)
         }
 
         initializeDependencies()
@@ -64,6 +71,17 @@ open class PostDetailsActivity : AppCompatActivity(), PostDetailsContract.View {
             picasso.load(postImageUrl).into(postDetailsImage)
         } else {
             postDetailsImage.visibility = View.GONE
+        }
+
+        if (postUrl != null) {
+            buttonOpenOnBrowser.setOnClickListener({
+                val builder = CustomTabsIntent.Builder()
+                val customTabsIntent = builder.build()
+                customTabsIntent.launchUrl(this, Uri.parse(postUrl))
+            })
+
+        } else {
+            buttonOpenOnBrowser.visibility = View.GONE
         }
     }
 
