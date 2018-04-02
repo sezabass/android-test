@@ -20,7 +20,7 @@ class RecentPostsModelTest {
     @Mock
     private lateinit var mockApi: RecentPostsApi
     @Mock
-    private lateinit var mockPresenter: RecentPostsPresenter
+    private lateinit var mockPresenter: RecentPostsContract.Presenter
     @Captor
     private lateinit var resultListenerArgumentCaptor: ArgumentCaptor<RecentPostsApi.ResultListener>
 

@@ -5,12 +5,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 @JsonIgnoreProperties(ignoreUnknown = true)
 class RecentPostModel {
     var data: Data? = null
+
+    fun imageUrl() = this.data?.preview?.images?.get(0)?.source?.url
 }
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 class Data {
     var after: String? = null
     var name: String? = null
+    var id: String? = null
     var children: Array<RecentPostModel>? = null
     var title: String? = null
     var url: String? = null

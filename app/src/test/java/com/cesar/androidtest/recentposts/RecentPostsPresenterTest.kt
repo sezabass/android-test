@@ -1,6 +1,7 @@
 package com.cesar.androidtest.recentposts
 
 import com.cesar.androidtest.recentposts.model.RecentPostModel
+import com.nhaarman.mockito_kotlin.same
 import com.nhaarman.mockito_kotlin.verify
 import org.junit.Before
 import org.junit.Test
@@ -55,8 +56,9 @@ class RecentPostsPresenterTest {
 
     @Test
     fun whenOnPostsListItemClickedThenCallViewShowPostDetails() {
-        presenter.onPostsListItemClicked()
-        verify(mockView).showPostDetails()
+        val somePost = RecentPostModel()
+        presenter.onPostsListItemClicked(somePost)
+        verify(mockView).showPostDetails(same(somePost))
     }
 
     @Test

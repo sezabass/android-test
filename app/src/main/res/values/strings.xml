@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Android Test</string>
-    <string name="recent_posts_thumbnail_description">This post\'s thumbnail</string>
+    <string name="recent_posts_thumbnail_description">A prévia da imagem deste post</string>
     <string name="message_error_list_request_not_successful">Erro ao receber posts</string>
     <string name="message_error_list_request_failure">Não foi possível receber posts. Verifique sua conexão</string>
     <string name="retry">Tentar de novo</string>
+    <string name="post_details_image_description">A imagem deste post</string>
+    <string name="open_post_url_button_text">Abrir URL do post</string>
 </resources>

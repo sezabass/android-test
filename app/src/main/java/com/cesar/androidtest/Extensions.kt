@@ -1,4 +1,4 @@
-package com.cesar.androidtest.recentposts.recyclerview
+package com.cesar.androidtest
 
 import android.support.annotation.LayoutRes
 import android.view.LayoutInflater

@@ -1,5 +1,6 @@
 package com.cesar.androidtest.recentposts
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.widget.SwipeRefreshLayout
@@ -10,6 +11,7 @@ import android.util.Log
 import android.view.View
 import com.cesar.androidtest.R
 import com.cesar.androidtest.httpclient.retrofit.di.DaggerNetworkComponent
+import com.cesar.androidtest.postdetails.PostDetailsActivity
 import com.cesar.androidtest.recentposts.di.DaggerRecentPostsComponent
 import com.cesar.androidtest.recentposts.di.RecentPostsModule
 import com.cesar.androidtest.recentposts.model.RecentPostModel
@@ -99,12 +101,27 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
         }
     }
 
-    override fun onPostsListItemClicked(listItem: View) {
-        presenter.onPostsListItemClicked()
+    override fun onPostsListItemClicked(listItem: View, post: RecentPostModel?) {
+        presenter.onPostsListItemClicked(post)
     }
 
-    override fun showPostDetails() {
-        Log.v(TAG, "Post details requested!")
+    override fun showPostDetails(post: RecentPostModel?) {
+        val postId = post?.data?.id
+        val postTitle = post?.data?.title
+        val postImage = post?.imageUrl()
+        val postUrl = post?.data?.url
+        Log.v(TAG, "Post details on $postId requested!")
+
+        val postDetailsIntent = Intent(this, PostDetailsActivity::class.java)
+        postDetailsIntent.putExtra(KEY_POST_ID, postId)
+        postDetailsIntent.putExtra(KEY_POST_TITLE, postTitle)
+        if (postImage != null) {
+            postDetailsIntent.putExtra(KEY_POST_IMAGE, postImage)
+        }
+        if (postUrl != null) {
+            postDetailsIntent.putExtra(KEY_POST_URL, postUrl)
+        }
+        this.startActivity(postDetailsIntent)
     }
 
     override fun onRequestListResponseNotSuccessful() {
@@ -128,6 +145,10 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
 
     companion object {
         const val TAG = "RecentPostsActivity"
+        const val KEY_POST_ID = "POST_ID"
+        const val KEY_POST_TITLE= "POST_TITLE"
+        const val KEY_POST_IMAGE = "POST_IMAGE"
+        const val KEY_POST_URL = "POST_URL"
     }
 }
 

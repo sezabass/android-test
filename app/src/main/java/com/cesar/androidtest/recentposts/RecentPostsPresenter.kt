@@ -39,7 +39,7 @@ class RecentPostsPresenter @Inject constructor(
         view.onRequestListFailure()
     }
 
-    override fun onPostsListItemClicked() {
-        view.showPostDetails()
+    override fun onPostsListItemClicked(post: RecentPostModel?) {
+        view.showPostDetails(post)
     }
 }

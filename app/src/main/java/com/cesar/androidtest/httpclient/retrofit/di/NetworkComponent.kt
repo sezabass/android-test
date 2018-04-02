@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(NetworkModule::class))
+@Component(modules = [(NetworkModule::class)])
 interface NetworkComponent {
     val retrofit: Retrofit
 }

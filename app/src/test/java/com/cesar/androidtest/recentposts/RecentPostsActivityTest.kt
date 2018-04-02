@@ -9,7 +9,6 @@ import kotlinx.android.synthetic.main.activity_recentposts.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers
 import org.mockito.Mockito.*
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
@@ -21,7 +20,7 @@ import org.robolectric.annotation.Config
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = intArrayOf(27))
+@Config(constants = BuildConfig::class, sdk = [27])
 class RecentPostsActivityTest {
 
     private lateinit var activity: RecentPostsActivity
@@ -43,13 +42,13 @@ class RecentPostsActivityTest {
 
     @Test
     fun whenLoadActivityThenRequestPostsList() {
-        verify(activity.presenter, times(1)).onLoad()
+        verify(activity.presenter).onLoad()
     }
 
     @Test
     fun whenSwipeToRefreshThenRequestPresenterOnSwipeToRefresh() {
         activity.onRefresh()
-        verify(activity.presenter, times(1)).onSwipeToRefresh()
+        verify(activity.presenter).onSwipeToRefresh()
     }
 
     @Test
@@ -68,7 +67,7 @@ class RecentPostsActivityTest {
         recyclerView.layout(0, 0, 100, 1000)
         recyclerView.findViewHolderForAdapterPosition(0).itemView.performClick()
 
-        verify(activity.presenter).onPostsListItemClicked()
+        verify(activity.presenter).onPostsListItemClicked(any())
     }
 
     @Test
@@ -81,7 +80,7 @@ class RecentPostsActivityTest {
         recyclerView.layout(0, 0, 100, 1000)
         recyclerView.findViewHolderForAdapterPosition(0).itemView.performClick()
 
-        verify(activity.presenter).onPostsListItemClicked()
+        verify(activity.presenter).onPostsListItemClicked(any())
     }
 
     @Test

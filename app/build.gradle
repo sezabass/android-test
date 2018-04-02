@@ -64,6 +64,8 @@ dependencies {
     implementation "com.android.support:cardview-v7:$support_version"
     // Snackbar
     implementation "com.android.support:design:$support_version"
+    // Chrome Custom Tabs
+    implementation "com.android.support:customtabs:$support_version"
 
     // Tests ----------------
 
