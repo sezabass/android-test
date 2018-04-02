@@ -6,11 +6,6 @@ import retrofit2.Response
 
 class RecentPostsApiImpl(val service: RecentPostsService) : RecentPostsApi {
 
-    companion object {
-        val TAG = "API-RecentPosts"
-        val pageSize = 10
-    }
-
     override fun list(lastViewed: String?, callback: RecentPostsApi.ResultListener?) {
 
         val listCall: Call<RecentPostModel>? = service.list(
@@ -36,6 +31,11 @@ class RecentPostsApiImpl(val service: RecentPostsService) : RecentPostsApi {
                 callback?.onFailure(t?.message.toString())
             }
         })
+    }
+
+    companion object {
+        const val TAG = "API-RecentPosts"
+        const val pageSize = 10
     }
 
 }

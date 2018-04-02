@@ -1,6 +1,7 @@
 package com.cesar.androidtest.recentposts
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -73,8 +74,6 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
             lastName = postsList.last().data?.name
         }
         presenter.requestMoreItems(lastName)
-        // TODO: Append the new data objects to the existing set of items inside the array of items
-        // TODO: Notify the adapter of the new items made with `notifyItemRangeInserted()`
     }
 
     override fun onRefresh() {
@@ -92,6 +91,7 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
             adapter.notifyDataSetChanged()
         }
     }
+
     override fun onListAddingComplete(response: List<RecentPostModel>) {
         runOnUiThread {
             postsList.addAll(response)
@@ -102,8 +102,32 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
     override fun onPostsListItemClicked(listItem: View) {
         presenter.onPostsListItemClicked()
     }
+
     override fun showPostDetails() {
-        Log.v("RecentPostsActivity", "Post details requested!")
+        Log.v(TAG, "Post details requested!")
+    }
+
+    override fun onRequestListResponseNotSuccessful() {
+        val message = applicationContext.getString(
+                R.string.message_error_list_request_not_successful)
+        createSnackBar(message)
+    }
+
+    override fun onRequestListFailure() {
+        val message = applicationContext.getString(
+                R.string.message_error_list_request_failure)
+        createSnackBar(message)
+    }
+
+    private fun createSnackBar(message: String) {
+        val snackbar: Snackbar = Snackbar.make(recentPostsLayout, message,
+                Snackbar.LENGTH_INDEFINITE)
+        snackbar.setAction(R.string.retry) { loadNextDataFromApi() }
+        snackbar.show()
+    }
+
+    companion object {
+        const val TAG = "RecentPostsActivity"
     }
 }
 
