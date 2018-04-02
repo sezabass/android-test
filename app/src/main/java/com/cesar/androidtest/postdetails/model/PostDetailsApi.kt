@@ -5,7 +5,6 @@ interface PostDetailsApi {
 
     interface ResultListener {
         fun onResponseSuccessful(response: List<Comment>)
-        fun onResponseNotSuccessful()
         fun onFailure(errorMessage: String)
     }
 }

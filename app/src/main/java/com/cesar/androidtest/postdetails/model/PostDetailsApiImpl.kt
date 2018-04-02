@@ -17,9 +17,6 @@ class PostDetailsApiImpl(val service: PostDetailsService) : PostDetailsApi {
                         callback?.onResponseSuccessful(it.toMutableList())
                         return
                     }
-                    callback?.onResponseNotSuccessful()
-                } else {
-                    callback?.onResponseNotSuccessful()
                 }
             }
 
