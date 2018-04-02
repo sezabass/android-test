@@ -1,0 +1,3 @@
+package com.cesar.androidtest.postdetails
+
+class PostDetailsPresenterTest
