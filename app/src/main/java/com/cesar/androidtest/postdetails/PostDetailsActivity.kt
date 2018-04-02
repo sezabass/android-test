@@ -13,10 +13,12 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_post_details.*
 import javax.inject.Inject
 
-open class PostDetailsActivity : AppCompatActivity() {
+open class PostDetailsActivity : AppCompatActivity(), PostDetailsContract.View {
 
     @Inject
     lateinit var picasso: Picasso
+    @Inject
+    lateinit var presenter: PostDetailsContract.Presenter
 
     private lateinit var postId: String
     private lateinit var postTitle: String
