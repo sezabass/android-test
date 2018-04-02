@@ -74,8 +74,6 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
             lastName = postsList.last().data?.name
         }
         presenter.requestMoreItems(lastName)
-        // TODO: Append the new data objects to the existing set of items inside the array of items
-        // TODO: Notify the adapter of the new items made with `notifyItemRangeInserted()`
     }
 
     override fun onRefresh() {
@@ -112,14 +110,19 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
     override fun onRequestListResponseNotSuccessful() {
         val message = applicationContext.getString(
                 R.string.message_error_list_request_not_successful)
-        val snackbar: Snackbar = Snackbar.make(recentPostsLayout, message, Snackbar.LENGTH_SHORT)
-        snackbar.show()
+        createSnackBar(message)
     }
 
     override fun onRequestListFailure() {
         val message = applicationContext.getString(
                 R.string.message_error_list_request_failure)
-        val snackbar: Snackbar = Snackbar.make(recentPostsLayout, message, Snackbar.LENGTH_SHORT)
+        createSnackBar(message)
+    }
+
+    private fun createSnackBar(message: String) {
+        val snackbar: Snackbar = Snackbar.make(recentPostsLayout, message,
+                Snackbar.LENGTH_INDEFINITE)
+        snackbar.setAction(R.string.retry) { loadNextDataFromApi() }
         snackbar.show()
     }
 
