@@ -44,10 +44,10 @@ open class PostDetailsActivity : AppCompatActivity(), PostDetailsContract.View {
         }
 
         initializeDependencies()
-
         initializeViews()
-
         initializeRecyclerView()
+
+        presenter.onLoad(postId)
     }
 
     open fun initializeDependencies() {
@@ -72,8 +72,19 @@ open class PostDetailsActivity : AppCompatActivity(), PostDetailsContract.View {
         linearLayoutManager = LinearLayoutManager(this)
         postDetailsCommentList.layoutManager = linearLayoutManager
 
-        adapter = PostDetailsRecyclerAdapter(this, commentsList, picasso)
+        adapter = PostDetailsRecyclerAdapter(this, commentsList)
         postDetailsCommentList.adapter = adapter
+    }
+
+    override fun onLoadCommentsSuccess(response: List<Comment>) {
+        runOnUiThread {
+            commentsList.clear()
+            commentsList.addAll(response)
+            adapter.notifyDataSetChanged()
+        }
+    }
+    override fun onLoadCommentsFailure() {
+        // TODO
     }
 
     companion object {
