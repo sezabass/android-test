@@ -7,8 +7,8 @@ interface RecentPostsContract {
         fun onListLoadingComplete(postsListResult: List<RecentPostModel>)
         fun onListAddingComplete(response: List<RecentPostModel>)
         fun hideLoading()
-        fun onPostsListItemClicked(listItem: android.view.View)
-        fun showPostDetails()
+        fun onPostsListItemClicked(listItem: android.view.View, post: RecentPostModel?)
+        fun showPostDetails(post: RecentPostModel?)
         fun onRequestListResponseNotSuccessful()
         fun onRequestListFailure()
     }
@@ -21,7 +21,7 @@ interface RecentPostsContract {
         fun onAddToListResponseSuccessful(response: List<RecentPostModel>)
         fun onRequestListResponseNotSuccessful()
         fun onRequestListFailure()
-        fun onPostsListItemClicked()
+        fun onPostsListItemClicked(post: RecentPostModel?)
     }
 
     interface Model {
