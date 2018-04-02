@@ -64,4 +64,18 @@ class RecentPostsPresenterTest {
         presenter.requestMoreItems(lastItemSample)
         verify(mockModel).requestList(lastItemSample)
     }
+
+    @Test
+    fun whenOnRequestListResponseNotSuccessfulThenCallViewOnRequestListResponseNotSuccessful() {
+        presenter.onRequestListResponseNotSuccessful()
+        verify(mockView).hideLoading()
+        verify(mockView).onRequestListResponseNotSuccessful()
+    }
+    
+    @Test
+    fun whenOnRequestListFailureThenCallViewOnRequestListFailure() {
+        presenter.onRequestListFailure()
+        verify(mockView).hideLoading()
+        verify(mockView).onRequestListFailure()
+    }
 }

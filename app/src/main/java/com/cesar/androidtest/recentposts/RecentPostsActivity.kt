@@ -102,8 +102,17 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
     override fun onPostsListItemClicked(listItem: View) {
         presenter.onPostsListItemClicked()
     }
+
     override fun showPostDetails() {
         Log.v("RecentPostsActivity", "Post details requested!")
+    }
+
+    override fun onRequestListResponseNotSuccessful() {
+        //TODO
+    }
+
+    override fun onRequestListFailure() {
+        //TODO
     }
 }
 

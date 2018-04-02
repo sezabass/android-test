@@ -9,6 +9,8 @@ interface RecentPostsContract {
         fun hideLoading()
         fun onPostsListItemClicked(listItem: android.view.View)
         fun showPostDetails()
+        fun onRequestListResponseNotSuccessful()
+        fun onRequestListFailure()
     }
 
     interface Presenter {

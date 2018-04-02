@@ -30,11 +30,13 @@ class RecentPostsPresenter @Inject constructor(
     }
 
     override fun onRequestListResponseNotSuccessful() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        view.hideLoading()
+        view.onRequestListResponseNotSuccessful()
     }
 
     override fun onRequestListFailure() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        view.hideLoading()
+        view.onRequestListFailure()
     }
 
     override fun onPostsListItemClicked() {
