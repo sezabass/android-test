@@ -10,4 +10,10 @@
     <dimen name="recent_posts_title_text_size">18sp</dimen>
     <dimen name="recent_posts_author_margin">8dp</dimen>
     <dimen name="recent_posts_author_text_size">15sp</dimen>
+    <dimen name="post_details_title">20sp</dimen>
+    <dimen name="post_details_image_maxsize">160dp</dimen>
+    <dimen name="post_details_comments_list_margin_top">8dp</dimen>
+    <dimen name="post_details_image_minsize">30dp</dimen>
+    <dimen name="post_details_title_padding">12dp</dimen>
+    <dimen name="post_details_button_margin_right">20dp</dimen>
 </resources>
