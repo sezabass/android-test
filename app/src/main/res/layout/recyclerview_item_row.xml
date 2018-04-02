@@ -35,7 +35,7 @@
                 tools:ignore="RtlHardcoded,RtlSymmetry">
 
                 <TextView
-                    android:id="@+id/itemTitle"
+                    android:id="@+id/itemBody"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"

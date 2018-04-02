@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.cesar.androidtest.R
+import com.cesar.androidtest.inflate
 import com.cesar.androidtest.recentposts.RecentPostsActivity
 import com.cesar.androidtest.recentposts.model.RecentPostModel
 import com.squareup.picasso.Picasso
@@ -43,7 +44,7 @@ class RecyclerAdapter(private val context: Context,
         fun bindPost(post: RecentPostModel, picasso: Picasso) {
 
             this.post = post
-            view.itemTitle.text = post.data?.title
+            view.itemBody.text = post.data?.title
             view.itemAuthor.text = post.data?.author
 
             val imageUrl = post.imageUrl()
