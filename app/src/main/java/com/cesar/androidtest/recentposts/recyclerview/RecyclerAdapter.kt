@@ -37,7 +37,7 @@ class RecyclerAdapter(private val context: Context,
         }
 
         override fun onClick(v: View) {
-            (this.context as RecentPostsActivity).onPostsListItemClicked(v)
+            (this.context as RecentPostsActivity).onPostsListItemClicked(v, post)
         }
 
         fun bindPost(post: RecentPostModel, picasso: Picasso) {
@@ -46,8 +46,7 @@ class RecyclerAdapter(private val context: Context,
             view.itemTitle.text = post.data?.title
             view.itemAuthor.text = post.data?.author
 
-            val imageUrl = post.data?.preview?.images?.get(0)?.source?.url
-
+            val imageUrl = post.imageUrl()
             if (imageUrl != null) {
                 picasso.load(imageUrl).into(view.itemImage)
             } else {
