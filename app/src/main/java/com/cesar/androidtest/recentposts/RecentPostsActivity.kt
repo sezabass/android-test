@@ -93,6 +93,7 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
             adapter.notifyDataSetChanged()
         }
     }
+
     override fun onListAddingComplete(response: List<RecentPostModel>) {
         runOnUiThread {
             postsList.addAll(response)
@@ -105,25 +106,25 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
     }
 
     override fun showPostDetails() {
-        Log.v("RecentPostsActivity", "Post details requested!")
+        Log.v(TAG, "Post details requested!")
     }
 
     override fun onRequestListResponseNotSuccessful() {
-        val snackbar: Snackbar = Snackbar.make(
-                recentPostsLayout, MESSAGE_REQUEST_NOT_SUCCESSFUL, Snackbar.LENGTH_SHORT)
+        val message = applicationContext.getString(
+                R.string.message_error_list_request_not_successful)
+        val snackbar: Snackbar = Snackbar.make(recentPostsLayout, message, Snackbar.LENGTH_SHORT)
         snackbar.show()
     }
 
     override fun onRequestListFailure() {
-        val snackbar: Snackbar = Snackbar.make(
-                recentPostsLayout, MESSAGE_REQUEST_FAILURE, Snackbar.LENGTH_SHORT)
+        val message = applicationContext.getString(
+                R.string.message_error_list_request_failure)
+        val snackbar: Snackbar = Snackbar.make(recentPostsLayout, message, Snackbar.LENGTH_SHORT)
         snackbar.show()
     }
 
     companion object {
         const val TAG = "RecentPostsActivity"
-        const val MESSAGE_REQUEST_NOT_SUCCESSFUL = "Erro ao receber posts"
-        const val MESSAGE_REQUEST_FAILURE = "Não foi possível receber posts. Verifique sua conexão"
     }
 }
 
