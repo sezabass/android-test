@@ -19,3 +19,51 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+#---------------Begin: support library
+-keep class android.support.v4.app.** { *; }
+-keep interface android.support.v4.app.** { *; }
+-keep class com.actionbarsherlock.** { *; }
+-keep interface com.actionbarsherlock.** { *; }
+
+# The support library contains references to newer platform versions.
+# Don't warn about those in case this app is linking against an older
+# platform version. We know about them, and they are safe.
+-dontwarn android.support.**
+-dontwarn com.google.ads.**
+##---------------End: support library
+
+
+#---------------Begin: Jackson
+-keepattributes *Annotation*,EnclosingMethod,Signature
+-keepnames class com.fasterxml.jackson.** { *; }
+-dontwarn com.fasterxml.jackson.databind.**
+-keep class org.codehaus.** { *; }
+-keepclassmembers public final enum org.codehaus.jackson.annotate.JsonAutoDetect$Visibility {
+    public static final org.codehaus.jackson.annotate.JsonAutoDetect$Visibility *; }
+-keep public class your.class.** {
+    *;
+}
+#---------------End: Jackson
+
+
+#---------------Begin: Dagger
+-dontwarn com.google.errorprone.annotations.**
+#---------------End: Dagger
+
+
+#---------------Begin: Retrofit
+-dontwarn okio.**
+-dontwarn javax.annotation.**
+-dontwarn retrofit2.Platform$Java8
+#---------------End: Retrofit
+
+
+#---------------Begin: Picasso
+# Checks for OkHttp versions on the classpath to determine Downloader to use.
+-dontnote com.squareup.picasso.Utils
+# Downloader used only when OkHttp 2.x is present on the classpath.
+-dontwarn com.squareup.picasso.OkHttpDownloader
+# Downloader used only when OkHttp 3.x is present on the classpath.
+-dontwarn com.squareup.picasso.OkHttp3Downloader
+#---------------End: Picasso
