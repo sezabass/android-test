@@ -21,8 +21,8 @@
 #-renamesourcefileattribute SourceFile
 
 #---------------Begin: support library
--keep class android.support.v4.app.** { *; }
--keep interface android.support.v4.app.** { *; }
+-keep class android.support.v4.** { *; }
+-keep interface android.support.v4.** { *; }
 -keep class com.actionbarsherlock.** { *; }
 -keep interface com.actionbarsherlock.** { *; }
 
@@ -31,6 +31,14 @@
 # platform version. We know about them, and they are safe.
 -dontwarn android.support.**
 -dontwarn com.google.ads.**
+
+-keep class android.support.v7.app.** { *; }
+-keep public class android.support.v7.widget.** { *; }
+-keep interface android.support.v7.widget.** { *; }
+
+-keep public class * extends android.support.v4.view.ActionProvider {
+    public <init>(android.content.Context);
+}
 ##---------------End: support library
 
 
@@ -53,9 +61,13 @@
 
 
 #---------------Begin: Retrofit
+-dontwarn okhttp3.**
 -dontwarn okio.**
 -dontwarn javax.annotation.**
 -dontwarn retrofit2.Platform$Java8
+-dontwarn org.conscrypt.**
+# A resource is loaded with a relative path so the package of this class must be preserved.
+-keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
 #---------------End: Retrofit
 
 
