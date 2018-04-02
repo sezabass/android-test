@@ -108,12 +108,15 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
     override fun showPostDetails(post: RecentPostModel?) {
         val postId = post?.data?.id
         val postTitle = post?.data?.title
+        val postImage = post?.imageUrl()
         Log.v(TAG, "Post details on $postId requested!")
 
         val postDetailsIntent = Intent(this, PostDetailsActivity::class.java)
         postDetailsIntent.putExtra(KEY_POST_ID, postId)
         postDetailsIntent.putExtra(KEY_POST_TITLE, postTitle)
-        postDetailsIntent.putExtra(KEY_POST_IMAGE, post?.imageUrl())
+        if (postImage != null) {
+            postDetailsIntent.putExtra(KEY_POST_IMAGE, postImage)
+        }
         this.startActivity(postDetailsIntent)
     }
 
