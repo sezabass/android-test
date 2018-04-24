@@ -26,10 +26,21 @@ class RecyclerAdapter(private val context: Context,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.PostHolder {
         val inflatedView = parent.inflate(R.layout.recyclerview_item_row)
-        return PostHolder(context, inflatedView)
+
+        val imageParams = inflatedView.itemImage.layoutParams
+                as LinearLayout.LayoutParams
+        val descriptionParams = inflatedView.itemDescriptionHolder.layoutParams
+                as LinearLayout.LayoutParams
+
+        return PostHolder(context, inflatedView, imageParams, descriptionParams)
     }
 
-    class PostHolder(private var context: Context, v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
+    class PostHolder(private var context: Context,
+                     v: View,
+                     private val imageParams: LinearLayout.LayoutParams,
+                     private val descriptionParams: LinearLayout.LayoutParams) :
+            RecyclerView.ViewHolder(v), View.OnClickListener {
+
         private var view: View = v
         private var post: RecentPostModel? = null
 
@@ -49,21 +60,37 @@ class RecyclerAdapter(private val context: Context,
 
             val imageUrl = post.imageUrl()
             if (imageUrl != null) {
+                adaptStyleWithImage()
                 picasso.load(imageUrl).into(view.itemImage)
             } else {
-                // hide image view
-                val imageParams: LinearLayout.LayoutParams =
-                        view.itemImage.layoutParams as LinearLayout.LayoutParams
-                imageParams.weight = 0f
-                view.itemImage.layoutParams = imageParams
-
-                // stretch text
-                val descriptionParams: LinearLayout.LayoutParams =
-                        view.itemDescriptionHolder.layoutParams as LinearLayout.LayoutParams
-                descriptionParams.weight = 3f
-                view.itemDescriptionHolder.layoutParams = descriptionParams
-
+                adaptStyleWithoutImage()
             }
+        }
+
+        private fun adaptStyleWithImage() {
+            // reset image view
+            imageParams.weight = IMAGE_SHOWN_IMAGE_WEIGHT
+            view.itemImage.layoutParams = imageParams
+            // reset text
+            descriptionParams.weight = IMAGE_SHOWN_TEXT_WEIGHT
+            view.itemDescriptionHolder.layoutParams = descriptionParams
+        }
+
+        private fun adaptStyleWithoutImage() {
+            // hide image view
+            imageParams.weight = IMAGE_HIDDEN_IMAGE_WEIGHT
+            view.itemImage.layoutParams = imageParams
+
+            // stretch text
+            descriptionParams.weight = IMAGE_HIDDEN_TEXT_WEIGHT
+            view.itemDescriptionHolder.layoutParams = descriptionParams
+        }
+
+        companion object {
+            private const val IMAGE_SHOWN_IMAGE_WEIGHT = 1f
+            private const val IMAGE_SHOWN_TEXT_WEIGHT = 2f
+            private const val IMAGE_HIDDEN_IMAGE_WEIGHT = 0f
+            private const val IMAGE_HIDDEN_TEXT_WEIGHT = 3f
         }
     }
 }
