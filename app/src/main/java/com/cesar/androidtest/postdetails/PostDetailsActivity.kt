@@ -3,9 +3,9 @@ package com.cesar.androidtest.postdetails
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.customtabs.CustomTabsIntent
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import com.cesar.androidtest.R
@@ -25,8 +25,8 @@ open class PostDetailsActivity : AppCompatActivity(), PostDetailsContract.View {
     @Inject
     lateinit var presenter: PostDetailsContract.Presenter
 
-    private lateinit var postId: String
-    private lateinit var postTitle: String
+    private var postId: String? = null
+    private var postTitle: String? = null
     private var postImageUrl: String? = null
     private var postUrl: String? = null
 
@@ -39,22 +39,22 @@ open class PostDetailsActivity : AppCompatActivity(), PostDetailsContract.View {
         setContentView(R.layout.activity_post_details)
 
         val intent: Intent = intent
-        postId = intent.extras.getString(RecentPostsActivity.KEY_POST_ID)
-        postTitle = intent.extras.getString(RecentPostsActivity.KEY_POST_TITLE)
+        postId = intent.extras!!.getString(RecentPostsActivity.KEY_POST_ID)
+        postTitle = intent.extras!!.getString(RecentPostsActivity.KEY_POST_TITLE)
 
         if (intent.hasExtra(RecentPostsActivity.KEY_POST_IMAGE)) {
-            postImageUrl = intent.extras.getString(RecentPostsActivity.KEY_POST_IMAGE)
+            postImageUrl = intent.extras!!.getString(RecentPostsActivity.KEY_POST_IMAGE)
         }
 
         if (intent.hasExtra(RecentPostsActivity.KEY_POST_URL)) {
-            postUrl = intent.extras.getString(RecentPostsActivity.KEY_POST_URL)
+            postUrl = intent.extras!!.getString(RecentPostsActivity.KEY_POST_URL)
         }
 
         initializeDependencies()
         initializeViews()
         initializeRecyclerView()
 
-        presenter.onLoad(postId)
+        presenter.onLoad(postId!!)
     }
 
     open fun initializeDependencies() {
@@ -74,11 +74,11 @@ open class PostDetailsActivity : AppCompatActivity(), PostDetailsContract.View {
         }
 
         if (postUrl != null) {
-            buttonOpenOnBrowser.setOnClickListener({
+            buttonOpenOnBrowser.setOnClickListener {
                 val builder = CustomTabsIntent.Builder()
                 val customTabsIntent = builder.build()
                 customTabsIntent.launchUrl(this, Uri.parse(postUrl))
-            })
+            }
 
         } else {
             buttonOpenOnBrowser.visibility = View.GONE

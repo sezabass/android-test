@@ -1,10 +1,9 @@
 package com.cesar.androidtest.recentposts
 
-import com.cesar.androidtest.BuildConfig
 import com.cesar.androidtest.recentposts.di.RecentPostsTestActivityMock
 import com.cesar.androidtest.recentposts.model.Data
 import com.cesar.androidtest.recentposts.model.RecentPostModel
-import junit.framework.Assert.assertFalse
+import junit.framework.TestCase.assertFalse
 import kotlinx.android.synthetic.main.activity_recentposts.*
 import org.junit.Before
 import org.junit.Test
@@ -12,7 +11,6 @@ import org.junit.runner.RunWith
 import org.mockito.Mockito.*
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -20,7 +18,6 @@ import org.robolectric.annotation.Config
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = [27])
 class RecentPostsActivityTest {
 
     private lateinit var activity: RecentPostsActivity
@@ -65,7 +62,7 @@ class RecentPostsActivityTest {
         // workaround robolectric recyclerView issue
         recyclerView.measure(0, 0)
         recyclerView.layout(0, 0, 100, 1000)
-        recyclerView.findViewHolderForAdapterPosition(0).itemView.performClick()
+        recyclerView.findViewHolderForAdapterPosition(0)?.itemView?.performClick()
 
         verify(activity.presenter).onPostsListItemClicked(any())
     }
@@ -78,7 +75,7 @@ class RecentPostsActivityTest {
         // workaround robolectric recyclerView issue
         recyclerView.measure(0, 0)
         recyclerView.layout(0, 0, 100, 1000)
-        recyclerView.findViewHolderForAdapterPosition(0).itemView.performClick()
+        recyclerView.findViewHolderForAdapterPosition(0)?.itemView?.performClick()
 
         verify(activity.presenter).onPostsListItemClicked(any())
     }

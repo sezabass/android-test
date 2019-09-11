@@ -1,7 +1,7 @@
 package com.cesar.androidtest.postdetails
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.cesar.androidtest.R
@@ -15,12 +15,12 @@ class PostDetailsRecyclerAdapter(private val context: Context,
 
     override fun getItemCount() = posts.size
 
-    override fun onBindViewHolder(holder: PostDetailsRecyclerAdapter.PostHolder, position: Int) {
+    override fun onBindViewHolder(holder: PostHolder, position: Int) {
         val itemPost = posts[position]
         holder.bindPost(itemPost)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostDetailsRecyclerAdapter.PostHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostHolder {
         val inflatedView = parent.inflate(R.layout.recyclerview_item_row)
         return PostHolder(context, inflatedView)
     }

@@ -1,7 +1,7 @@
 package com.cesar.androidtest.recentposts.recyclerview
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -19,12 +19,12 @@ class RecyclerAdapter(private val context: Context,
 
     override fun getItemCount() = posts.size
 
-    override fun onBindViewHolder(holder: RecyclerAdapter.PostHolder, position: Int) {
+    override fun onBindViewHolder(holder: PostHolder, position: Int) {
         val itemPost = posts[position]
         holder.bindPost(itemPost, picasso)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.PostHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostHolder {
         val inflatedView = parent.inflate(R.layout.recyclerview_item_row)
 
         val imageParams = inflatedView.itemImage.layoutParams
