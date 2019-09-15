@@ -13,7 +13,7 @@ import com.cesar.androidtest.httpclient.retrofit.di.DaggerNetworkComponent
 import com.cesar.androidtest.postdetails.di.DaggerPostDetailsComponent
 import com.cesar.androidtest.postdetails.di.PostDetailsModule
 import com.cesar.androidtest.postdetails.model.Comment
-import com.cesar.androidtest.recentposts.RecentPostsActivity
+import com.cesar.androidtest.recentposts.presentation.RecentPostsActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_post_details.*
 import javax.inject.Inject

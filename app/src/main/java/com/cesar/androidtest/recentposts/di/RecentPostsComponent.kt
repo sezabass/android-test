@@ -1,7 +1,7 @@
 package com.cesar.androidtest.recentposts.di
 
 import com.cesar.androidtest.httpclient.retrofit.di.NetworkComponent
-import com.cesar.androidtest.recentposts.RecentPostsActivity
+import com.cesar.androidtest.recentposts.presentation.RecentPostsActivity
 import dagger.Component
 
 @RecentPostsScope

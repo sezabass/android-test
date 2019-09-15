@@ -1,9 +1,8 @@
 package com.cesar.androidtest.postdetails
 
 import android.content.Intent
-import com.cesar.androidtest.BuildConfig
 import com.cesar.androidtest.postdetails.di.PostDetailsTestActivityMock
-import com.cesar.androidtest.recentposts.RecentPostsActivity
+import com.cesar.androidtest.recentposts.presentation.RecentPostsActivity
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

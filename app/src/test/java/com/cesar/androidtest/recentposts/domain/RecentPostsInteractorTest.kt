@@ -1,5 +1,6 @@
-package com.cesar.androidtest.recentposts
+package com.cesar.androidtest.recentposts.domain
 
+import com.cesar.androidtest.recentposts.RecentPostsContract
 import com.cesar.androidtest.recentposts.model.RecentPostModel
 import com.cesar.androidtest.recentposts.model.RecentPostsRepository
 import com.nhaarman.mockito_kotlin.isNull

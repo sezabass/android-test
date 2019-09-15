@@ -1,5 +1,6 @@
-package com.cesar.androidtest.recentposts
+package com.cesar.androidtest.recentposts.presentation
 
+import com.cesar.androidtest.recentposts.RecentPostsContract
 import com.cesar.androidtest.recentposts.model.RecentPostModel
 import com.nhaarman.mockito_kotlin.same
 import com.nhaarman.mockito_kotlin.verify

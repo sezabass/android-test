@@ -1,4 +1,4 @@
-package com.cesar.androidtest.recentposts.recyclerview
+package com.cesar.androidtest.recentposts.presentation.recyclerview
 
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.cesar.androidtest.R
 import com.cesar.androidtest.inflate
-import com.cesar.androidtest.recentposts.RecentPostsActivity
+import com.cesar.androidtest.recentposts.presentation.RecentPostsActivity
 import com.cesar.androidtest.recentposts.model.RecentPostModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.recyclerview_item_row.view.*

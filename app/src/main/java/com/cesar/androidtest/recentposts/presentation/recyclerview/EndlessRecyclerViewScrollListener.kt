@@ -1,4 +1,4 @@
-package com.cesar.androidtest.recentposts.recyclerview
+package com.cesar.androidtest.recentposts.presentation.recyclerview
 
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager

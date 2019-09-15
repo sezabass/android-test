@@ -1,4 +1,4 @@
-package com.cesar.androidtest.recentposts
+package com.cesar.androidtest.recentposts.presentation
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,11 +12,12 @@ import android.view.View
 import com.cesar.androidtest.R
 import com.cesar.androidtest.httpclient.retrofit.di.DaggerNetworkComponent
 import com.cesar.androidtest.postdetails.PostDetailsActivity
+import com.cesar.androidtest.recentposts.RecentPostsContract
 import com.cesar.androidtest.recentposts.di.DaggerRecentPostsComponent
 import com.cesar.androidtest.recentposts.di.RecentPostsModule
 import com.cesar.androidtest.recentposts.model.RecentPostModel
-import com.cesar.androidtest.recentposts.recyclerview.EndlessRecyclerViewScrollListener
-import com.cesar.androidtest.recentposts.recyclerview.RecyclerAdapter
+import com.cesar.androidtest.recentposts.presentation.recyclerview.EndlessRecyclerViewScrollListener
+import com.cesar.androidtest.recentposts.presentation.recyclerview.RecyclerAdapter
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_recentposts.*
 import javax.inject.Inject

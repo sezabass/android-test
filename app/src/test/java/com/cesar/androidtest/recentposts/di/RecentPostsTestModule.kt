@@ -1,6 +1,6 @@
 package com.cesar.androidtest.recentposts.di
 
-import com.cesar.androidtest.recentposts.RecentPostsActivity
+import com.cesar.androidtest.recentposts.presentation.RecentPostsActivity
 import com.cesar.androidtest.recentposts.RecentPostsContract
 import com.cesar.androidtest.recentposts.model.RecentPostsRepository
 import com.cesar.androidtest.recentposts.model.RecentPostsRepositoryImpl

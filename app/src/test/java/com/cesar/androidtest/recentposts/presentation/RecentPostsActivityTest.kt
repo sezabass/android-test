@@ -1,4 +1,4 @@
-package com.cesar.androidtest.recentposts
+package com.cesar.androidtest.recentposts.presentation
 
 import com.cesar.androidtest.recentposts.di.RecentPostsTestActivityMock
 import com.cesar.androidtest.recentposts.model.Data

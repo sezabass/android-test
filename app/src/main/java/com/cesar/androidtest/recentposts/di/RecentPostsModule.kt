@@ -1,9 +1,9 @@
 package com.cesar.androidtest.recentposts.di
 
-import com.cesar.androidtest.recentposts.RecentPostsActivity
+import com.cesar.androidtest.recentposts.presentation.RecentPostsActivity
 import com.cesar.androidtest.recentposts.RecentPostsContract
-import com.cesar.androidtest.recentposts.RecentPostsInteractor
-import com.cesar.androidtest.recentposts.RecentPostsPresenter
+import com.cesar.androidtest.recentposts.domain.RecentPostsInteractor
+import com.cesar.androidtest.recentposts.presentation.RecentPostsPresenter
 import com.cesar.androidtest.recentposts.model.RecentPostsRepository
 import com.cesar.androidtest.recentposts.model.RecentPostsRepositoryImpl
 import com.cesar.androidtest.recentposts.model.RecentPostsService
@@ -17,21 +17,21 @@ class RecentPostsModule(val activity: RecentPostsActivity){
 
     @RecentPostsScope
     @Provides
-    fun recentPostsService(retrofit: Retrofit): RecentPostsService =
+    fun provideRecentPostsService(retrofit: Retrofit): RecentPostsService =
         retrofit.create(RecentPostsService::class.java)
 
     @RecentPostsScope
     @Provides
-    fun recentPostsApi(service: RecentPostsService): RecentPostsRepository =
+    fun provideRecentPostsApi(service: RecentPostsService): RecentPostsRepository =
         RecentPostsRepositoryImpl(service)
 
     @RecentPostsScope
     @Provides
-    fun picasso() : Picasso = Picasso.Builder(activity).build()
+    fun providePicasso() : Picasso = Picasso.Builder(activity).build()
 
     @RecentPostsScope
     @Provides
-    fun recentPostsPresenter(repository: RecentPostsRepository): RecentPostsContract.Presenter {
+    fun provideRecentPostsPresenter(repository: RecentPostsRepository): RecentPostsContract.Presenter {
         val interactor = RecentPostsInteractor(repository)
         val presenter = RecentPostsPresenter(activity, interactor)
         interactor.presenter = presenter

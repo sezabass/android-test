@@ -10,7 +10,7 @@
         android:id="@+id/recentPostsLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.cesar.androidtest.recentposts.RecentPostsActivity">
+        tools:context="com.cesar.androidtest.recentposts.presentation.RecentPostsActivity">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
