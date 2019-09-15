@@ -15,7 +15,7 @@ class RecentPostsPresenterTest {
     private fun <T> uninitialized(): T = null as T
 
     lateinit var mockView: RecentPostsContract.View
-    lateinit var mockModel: RecentPostsContract.Model
+    lateinit var mockInteractor: RecentPostsContract.Interactor
     lateinit var presenter: RecentPostsContract.Presenter
 
     private val lastItemSample: String = "lastItemSample"
@@ -23,21 +23,21 @@ class RecentPostsPresenterTest {
     @Before
     fun setUp() {
         mockView = Mockito.mock(RecentPostsContract.View::class.java)
-        mockModel = Mockito.mock(RecentPostsContract.Model::class.java)
+        mockInteractor = Mockito.mock(RecentPostsContract.Interactor::class.java)
 
-        presenter = RecentPostsPresenter(mockView, mockModel)
+        presenter = RecentPostsPresenter(mockView, mockInteractor)
     }
 
     @Test
     fun whenOnLoadThenRequestListToModel() {
         presenter.onLoad()
-        verify(mockModel).requestList(null)
+        verify(mockInteractor).requestList(null)
     }
 
     @Test
     fun whenOnSwipeToRefreshThenRequestListToModel() {
         presenter.onSwipeToRefresh()
-        verify(mockModel).requestList(null)
+        verify(mockInteractor).requestList(null)
     }
 
     @Test
@@ -64,7 +64,7 @@ class RecentPostsPresenterTest {
     @Test
     fun whenRequestMoreItemsThenCallModelRequestList() {
         presenter.requestMoreItems(lastItemSample)
-        verify(mockModel).requestList(lastItemSample)
+        verify(mockInteractor).requestList(lastItemSample)
     }
 
     @Test

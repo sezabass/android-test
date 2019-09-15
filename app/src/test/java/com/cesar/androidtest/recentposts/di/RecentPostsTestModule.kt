@@ -2,8 +2,8 @@ package com.cesar.androidtest.recentposts.di
 
 import com.cesar.androidtest.recentposts.RecentPostsActivity
 import com.cesar.androidtest.recentposts.RecentPostsContract
-import com.cesar.androidtest.recentposts.model.RecentPostsApi
-import com.cesar.androidtest.recentposts.model.RecentPostsApiImpl
+import com.cesar.androidtest.recentposts.model.RecentPostsRepository
+import com.cesar.androidtest.recentposts.model.RecentPostsRepositoryImpl
 import com.cesar.androidtest.recentposts.model.RecentPostsService
 import com.squareup.picasso.Picasso
 import dagger.Module
@@ -16,25 +16,25 @@ class RecentPostsTestModule(val activity: RecentPostsActivity) {
 
     @RecentPostsScope
     @Provides
-    fun recentPostsService(retrofit: Retrofit): RecentPostsService {
+    fun provideRecentPostsService(retrofit: Retrofit): RecentPostsService {
         return retrofit.create(RecentPostsService::class.java)
     }
 
     @RecentPostsScope
     @Provides
-    fun recentPostsApi(service: RecentPostsService): RecentPostsApi {
-        return Mockito.mock(RecentPostsApiImpl::class.java)
+    fun provideRecentPostsRepository(): RecentPostsRepository {
+        return Mockito.mock(RecentPostsRepositoryImpl::class.java)
     }
 
     @RecentPostsScope
     @Provides
-    fun picasso(): Picasso {
+    fun providePicasso(): Picasso {
         return Mockito.mock(Picasso::class.java)
     }
 
     @RecentPostsScope
     @Provides
-    fun recentPostsPresenter(api: RecentPostsApi): RecentPostsContract.Presenter {
+    fun provideRecentPostsPresenter(): RecentPostsContract.Presenter {
         return Mockito.mock(RecentPostsContract.Presenter::class.java)
     }
 

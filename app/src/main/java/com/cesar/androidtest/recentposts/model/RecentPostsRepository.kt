@@ -4,9 +4,19 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RecentPostsApiImpl(val service: RecentPostsService) : RecentPostsApi {
+interface RecentPostsRepository {
+    fun list(lastViewed: String?, callback: ResultListener?)
 
-    override fun list(lastViewed: String?, callback: RecentPostsApi.ResultListener?) {
+    interface ResultListener {
+        fun onResponseSuccessful(response: List<RecentPostModel>)
+        fun onResponseNotSuccessful()
+        fun onFailure(errorMessage: String)
+    }
+}
+
+class RecentPostsRepositoryImpl(val service: RecentPostsService) : RecentPostsRepository {
+
+    override fun list(lastViewed: String?, callback: RecentPostsRepository.ResultListener?) {
 
         val listCall: Call<RecentPostModel>? = service.list(
                 limit = pageSize,

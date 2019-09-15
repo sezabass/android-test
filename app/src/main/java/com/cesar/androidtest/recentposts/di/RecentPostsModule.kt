@@ -2,10 +2,10 @@ package com.cesar.androidtest.recentposts.di
 
 import com.cesar.androidtest.recentposts.RecentPostsActivity
 import com.cesar.androidtest.recentposts.RecentPostsContract
-import com.cesar.androidtest.recentposts.RecentPostsModel
+import com.cesar.androidtest.recentposts.RecentPostsInteractor
 import com.cesar.androidtest.recentposts.RecentPostsPresenter
-import com.cesar.androidtest.recentposts.model.RecentPostsApi
-import com.cesar.androidtest.recentposts.model.RecentPostsApiImpl
+import com.cesar.androidtest.recentposts.model.RecentPostsRepository
+import com.cesar.androidtest.recentposts.model.RecentPostsRepositoryImpl
 import com.cesar.androidtest.recentposts.model.RecentPostsService
 import com.squareup.picasso.Picasso
 import dagger.Module
@@ -17,28 +17,24 @@ class RecentPostsModule(val activity: RecentPostsActivity){
 
     @RecentPostsScope
     @Provides
-    fun recentPostsService(retrofit: Retrofit): RecentPostsService {
-        return retrofit.create(RecentPostsService::class.java)
-    }
+    fun recentPostsService(retrofit: Retrofit): RecentPostsService =
+        retrofit.create(RecentPostsService::class.java)
 
     @RecentPostsScope
     @Provides
-    fun recentPostsApi(service: RecentPostsService): RecentPostsApi {
-        return RecentPostsApiImpl(service)
-    }
+    fun recentPostsApi(service: RecentPostsService): RecentPostsRepository =
+        RecentPostsRepositoryImpl(service)
 
     @RecentPostsScope
     @Provides
-    fun picasso() : Picasso {
-        return Picasso.Builder(activity).build()
-    }
+    fun picasso() : Picasso = Picasso.Builder(activity).build()
 
     @RecentPostsScope
     @Provides
-    fun recentPostsPresenter(api: RecentPostsApi): RecentPostsContract.Presenter {
-        val model = RecentPostsModel(api)
-        val presenter = RecentPostsPresenter(activity, model)
-        model.presenter = presenter
+    fun recentPostsPresenter(repository: RecentPostsRepository): RecentPostsContract.Presenter {
+        val interactor = RecentPostsInteractor(repository)
+        val presenter = RecentPostsPresenter(activity, interactor)
+        interactor.presenter = presenter
         return presenter
     }
 

@@ -8,7 +8,7 @@ import org.junit.Test
 import org.mockito.*
 import org.mockito.Mockito.verify
 
-class PostDetailsModelTest {// Helper function for Mockito with Kotlin
+class PostDetailsInteractorTest {// Helper function for Mockito with Kotlin
 private fun <T> any(): T {
     Mockito.any<T>();return uninitialized()}
     @Suppress("UNCHECKED_CAST")

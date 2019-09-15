@@ -4,19 +4,19 @@ import com.cesar.androidtest.recentposts.model.RecentPostModel
 import javax.inject.Inject
 
 class RecentPostsPresenter @Inject constructor(
-        val view: RecentPostsContract.View, val model: RecentPostsContract.Model) :
+        val view: RecentPostsContract.View, val interactor: RecentPostsContract.Interactor) :
         RecentPostsContract.Presenter {
 
     override fun onLoad() {
-        model.requestList(null)
+        interactor.requestList(null)
     }
 
     override fun requestMoreItems(lastName: String?) {
-        model.requestList(lastName)
+        interactor.requestList(lastName)
     }
 
     override fun onSwipeToRefresh() {
-        model.requestList(null)
+        interactor.requestList(null)
     }
 
     override fun onReplaceListResponseSuccessful(response: List<RecentPostModel>) {

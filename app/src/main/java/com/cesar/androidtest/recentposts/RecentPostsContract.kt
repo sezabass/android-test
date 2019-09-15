@@ -24,7 +24,7 @@ interface RecentPostsContract {
         fun onPostsListItemClicked(post: RecentPostModel?)
     }
 
-    interface Model {
+    interface Interactor {
         fun requestList(lastViewed: String?)
     }
 }

@@ -11,11 +11,11 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class RecentPostsApiImplTest {
+class RecentPostsRepositoryImplTest {
 
-    private lateinit var api: RecentPostsApiImpl
+    private lateinit var api: RecentPostsRepositoryImpl
     @Mock
-    private lateinit var mockListener: RecentPostsApi.ResultListener
+    private lateinit var mockListener: RecentPostsRepository.ResultListener
     @Mock
     private lateinit var mockService: RecentPostsService
     @Mock
@@ -44,7 +44,7 @@ class RecentPostsApiImplTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         initSampleData()
-        api = RecentPostsApiImpl(mockService)
+        api = RecentPostsRepositoryImpl(mockService)
     }
 
     @Test

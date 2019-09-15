@@ -1,16 +1,16 @@
 package com.cesar.androidtest.recentposts
 
 import com.cesar.androidtest.recentposts.model.RecentPostModel
-import com.cesar.androidtest.recentposts.model.RecentPostsApi
+import com.cesar.androidtest.recentposts.model.RecentPostsRepository
 
 
-class RecentPostsModel(val api: RecentPostsApi) : RecentPostsContract.Model {
+class RecentPostsInteractor(val repository: RecentPostsRepository) : RecentPostsContract.Interactor {
 
     var presenter: RecentPostsContract.Presenter? = null
 
     override fun requestList(lastViewed: String?) {
 
-        api.list(lastViewed, object : RecentPostsApi.ResultListener {
+        repository.list(lastViewed, object : RecentPostsRepository.ResultListener {
             override fun onResponseSuccessful(response: List<RecentPostModel>) {
                 if (lastViewed == null) {
                     presenter?.onReplaceListResponseSuccessful(response)
