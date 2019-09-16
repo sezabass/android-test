@@ -2,13 +2,12 @@ package com.cesar.androidtest.recentposts.presentation
 
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import android.util.Log
-import android.view.View
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.cesar.androidtest.R
 import com.cesar.androidtest.httpclient.retrofit.di.DaggerNetworkComponent
 import com.cesar.androidtest.postdetails.PostDetailsActivity
@@ -18,6 +17,7 @@ import com.cesar.androidtest.recentposts.di.RecentPostsModule
 import com.cesar.androidtest.recentposts.model.RecentPost
 import com.cesar.androidtest.recentposts.presentation.recyclerview.EndlessRecyclerViewScrollListener
 import com.cesar.androidtest.recentposts.presentation.recyclerview.RecyclerAdapter
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_recentposts.*
 import javax.inject.Inject
@@ -147,7 +147,7 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
     companion object {
         const val TAG = "RecentPostsActivity"
         const val KEY_POST_ID = "POST_ID"
-        const val KEY_POST_TITLE= "POST_TITLE"
+        const val KEY_POST_TITLE = "POST_TITLE"
         const val KEY_POST_IMAGE = "POST_IMAGE"
         const val KEY_POST_URL = "POST_URL"
     }

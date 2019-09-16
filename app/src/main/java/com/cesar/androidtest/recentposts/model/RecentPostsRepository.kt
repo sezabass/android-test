@@ -6,41 +6,35 @@ import retrofit2.Response
 import javax.inject.Inject
 
 interface RecentPostsRepository {
-    fun list(lastViewed: String?, callback: ResultListener?)
-
-    interface ResultListener {
-        fun onResponseSuccessful(response: List<RecentPost>)
-        fun onResponseNotSuccessful()
-        fun onFailure(errorMessage: String)
-    }
+    fun list(callback: RecentPostsCallback)
 }
 
 class RecentPostsRepositoryImpl @Inject constructor(
         private val service: RecentPostsService) : RecentPostsRepository {
 
-    override fun list(lastViewed: String?, callback: RecentPostsRepository.ResultListener?) {
+    override fun list(callback: RecentPostsCallback) {
 
         val listCall: Call<RecentPost>? = service.list(
                 limit = pageSize,
                 count = pageSize,
-                after = lastViewed
+                after = callback.lastViewed
         )
 
         listCall?.enqueue(object : Callback<RecentPost> {
             override fun onResponse(call: Call<RecentPost>?, response: Response<RecentPost>?) {
                 if (response!!.isSuccessful) {
                     response.body()?.data?.children?.let {
-                        callback?.onResponseSuccessful(it.toMutableList())
+                        callback.onResponseSuccessful(it.toMutableList())
                         return
                     }
-                    callback?.onResponseNotSuccessful()
+                    callback.onResponseNotSuccessful()
                 } else {
-                    callback?.onResponseNotSuccessful()
+                    callback.onResponseNotSuccessful()
                 }
             }
 
             override fun onFailure(call: Call<RecentPost>?, t: Throwable?) {
-                callback?.onFailure(t?.message.toString())
+                callback.onFailure(t?.message.toString())
             }
         })
     }

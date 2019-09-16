@@ -1,6 +1,7 @@
 package com.cesar.androidtest.recentposts
 
 import com.cesar.androidtest.recentposts.model.RecentPost
+import com.cesar.androidtest.recentposts.model.RecentPostsCallback
 
 interface RecentPostsContract {
     interface View {
@@ -14,6 +15,7 @@ interface RecentPostsContract {
     }
 
     interface Presenter {
+        var loadItemsResultListener: RecentPostsCallback
         fun onLoad()
         fun requestMoreItems(lastName: String?)
         fun onSwipeToRefresh()
@@ -25,6 +27,6 @@ interface RecentPostsContract {
     }
 
     interface Interactor {
-        fun requestList(lastViewed: String?)
+        fun requestList(callback: RecentPostsCallback)
     }
 }

@@ -15,7 +15,7 @@ class RecentPostsRepositoryImplTest {
 
     private lateinit var api: RecentPostsRepositoryImpl
     @Mock
-    private lateinit var mockListener: RecentPostsRepository.ResultListener
+    private lateinit var mockListener: RecentPostsCallback
     @Mock
     private lateinit var mockService: RecentPostsService
     @Mock
@@ -49,7 +49,9 @@ class RecentPostsRepositoryImplTest {
 
     @Test
     fun whenApiListThenCallServiceList() {
-        api.list(sampleName, mockListener)
+        `when`(mockListener.lastViewed).thenReturn(sampleName)
+
+        api.list(mockListener)
         verify(mockService).list(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt(),
                 same(sampleName))
     }
@@ -61,7 +63,9 @@ class RecentPostsRepositoryImplTest {
 
         `when`(mockService.list(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt(),
                 same(sampleName))).thenReturn(mockListCall)
-        api.list(sampleName, mockListener)
+        `when`(mockListener.lastViewed).thenReturn(sampleName)
+
+        api.list(mockListener)
         verify(mockListCall).enqueue(callbackArgumentCaptor.capture())
         callbackArgumentCaptor.value.onResponse(mockListCall, response)
 
@@ -75,7 +79,9 @@ class RecentPostsRepositoryImplTest {
 
         `when`(mockService.list(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt(),
                 same(sampleName))).thenReturn(mockListCall)
-        api.list(sampleName, mockListener)
+        `when`(mockListener.lastViewed).thenReturn(sampleName)
+
+        api.list(mockListener)
         verify(mockListCall).enqueue(callbackArgumentCaptor.capture())
         callbackArgumentCaptor.value.onResponse(mockListCall, response)
 
@@ -92,7 +98,9 @@ class RecentPostsRepositoryImplTest {
 
         `when`(mockService.list(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt(),
                 same(sampleName))).thenReturn(mockListCall)
-        api.list(sampleName, mockListener)
+        `when`(mockListener.lastViewed).thenReturn(sampleName)
+
+        api.list(mockListener)
         verify(mockListCall).enqueue(callbackArgumentCaptor.capture())
         callbackArgumentCaptor.value.onResponse(mockListCall, response)
 
@@ -104,7 +112,9 @@ class RecentPostsRepositoryImplTest {
         val message = "Some error message"
         `when`(mockService.list(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt(),
                 same(sampleName))).thenReturn(mockListCall)
-        api.list(sampleName, mockListener)
+        `when`(mockListener.lastViewed).thenReturn(sampleName)
+
+        api.list(mockListener)
         verify(mockListCall).enqueue(callbackArgumentCaptor.capture())
         callbackArgumentCaptor.value.onFailure(mockListCall, Throwable(message))
 
