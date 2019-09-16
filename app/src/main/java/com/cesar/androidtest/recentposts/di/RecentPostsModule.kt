@@ -11,6 +11,7 @@ import com.squareup.picasso.Picasso
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
+import retrofit2.create
 
 @Module
 class RecentPostsModule(val activity: RecentPostsActivity) {
@@ -21,8 +22,7 @@ class RecentPostsModule(val activity: RecentPostsActivity) {
 
     @RecentPostsScope
     @Provides
-    fun provideRecentPostsService(retrofit: Retrofit): RecentPostsService =
-            retrofit.create(RecentPostsService::class.java)
+    fun provideRecentPostsService(retrofit: Retrofit): RecentPostsService = retrofit.create()
 
     @RecentPostsScope
     @Provides
