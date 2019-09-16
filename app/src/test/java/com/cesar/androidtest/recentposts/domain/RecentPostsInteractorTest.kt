@@ -1,7 +1,7 @@
 package com.cesar.androidtest.recentposts.domain
 
 import com.cesar.androidtest.recentposts.RecentPostsContract
-import com.cesar.androidtest.recentposts.model.RecentPostModel
+import com.cesar.androidtest.recentposts.model.RecentPost
 import com.cesar.androidtest.recentposts.model.RecentPostsRepository
 import com.nhaarman.mockito_kotlin.isNull
 import org.junit.Before
@@ -42,7 +42,7 @@ class RecentPostsInteractorTest {
 
     @Test
     fun givenListRequestedWithLastViewedWhenResponseSuccessfulThenCallPresenterAddToListResponseSuccessful() {
-        val anyList = listOf(RecentPostModel())
+        val anyList = listOf(RecentPost())
         interactor.requestList(lastItemSample)
 
         verify(mockRepository).list(same(lastItemSample), resultListenerArgumentCaptor.capture())
@@ -53,7 +53,7 @@ class RecentPostsInteractorTest {
 
     @Test
     fun givenListRequestedWithoutLastViewedWhenResponseSuccessfulThenCallPresenterReplaceListResponseSuccessful() {
-        val anyList = listOf(RecentPostModel())
+        val anyList = listOf(RecentPost())
         interactor.requestList(null)
 
         verify(mockRepository).list(isNull(), resultListenerArgumentCaptor.capture())

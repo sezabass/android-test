@@ -19,15 +19,15 @@ class RecentPostsRepositoryImplTest {
     @Mock
     private lateinit var mockService: RecentPostsService
     @Mock
-    private lateinit var mockListCall: Call<RecentPostModel>
-    private val sampleList = arrayOf(RecentPostModel())
-    private val sampleRoot = RecentPostModel()
+    private lateinit var mockListCall: Call<RecentPost>
+    private val sampleList = arrayOf(RecentPost())
+    private val sampleRoot = RecentPost()
     private val sampleName: String = "sampleName"
     @Captor
-    private lateinit var callbackArgumentCaptor: ArgumentCaptor<Callback<RecentPostModel>>
+    private lateinit var callbackArgumentCaptor: ArgumentCaptor<Callback<RecentPost>>
 
     private fun initSampleData() {
-        val samplePost = RecentPostModel()
+        val samplePost = RecentPost()
         val sampleData = Data()
         sampleData.author = "Sample Author"
         sampleData.title = "Sample Title"
@@ -56,7 +56,7 @@ class RecentPostsRepositoryImplTest {
 
     @Test
     fun givenApiListResponseWhenHasGoodDataThenCallbackResponseSuccessful() {
-        val response: Response<RecentPostModel> =
+        val response: Response<RecentPost> =
                 Response.success(sampleRoot)
 
         `when`(mockService.list(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt(),
@@ -70,7 +70,7 @@ class RecentPostsRepositoryImplTest {
 
     @Test
     fun givenApiListResponseWhenHasWrongDataThenCallbackResponseNotSuccessful() {
-        val response: Response<RecentPostModel> =
+        val response: Response<RecentPost> =
                 Response.success(null)
 
         `when`(mockService.list(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt(),
@@ -84,7 +84,7 @@ class RecentPostsRepositoryImplTest {
 
     @Test
     fun givenApiListResponseWhenErrorThenCallbackResponseNotSuccessful() {
-        val response: Response<RecentPostModel> =
+        val response: Response<RecentPost> =
                 Response.error(404, ResponseBody.create(
                         MediaType.parse("application/json"),
                         "\"{\\\"sampleKey\\\":[\\\"sampleValue\\\"]}\"")

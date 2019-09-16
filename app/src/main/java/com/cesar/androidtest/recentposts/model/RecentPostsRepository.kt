@@ -9,7 +9,7 @@ interface RecentPostsRepository {
     fun list(lastViewed: String?, callback: ResultListener?)
 
     interface ResultListener {
-        fun onResponseSuccessful(response: List<RecentPostModel>)
+        fun onResponseSuccessful(response: List<RecentPost>)
         fun onResponseNotSuccessful()
         fun onFailure(errorMessage: String)
     }
@@ -20,14 +20,14 @@ class RecentPostsRepositoryImpl @Inject constructor(
 
     override fun list(lastViewed: String?, callback: RecentPostsRepository.ResultListener?) {
 
-        val listCall: Call<RecentPostModel>? = service.list(
+        val listCall: Call<RecentPost>? = service.list(
                 limit = pageSize,
                 count = pageSize,
                 after = lastViewed
         )
 
-        listCall?.enqueue(object : Callback<RecentPostModel> {
-            override fun onResponse(call: Call<RecentPostModel>?, response: Response<RecentPostModel>?) {
+        listCall?.enqueue(object : Callback<RecentPost> {
+            override fun onResponse(call: Call<RecentPost>?, response: Response<RecentPost>?) {
                 if (response!!.isSuccessful) {
                     response.body()?.data?.children?.let {
                         callback?.onResponseSuccessful(it.toMutableList())
@@ -39,7 +39,7 @@ class RecentPostsRepositoryImpl @Inject constructor(
                 }
             }
 
-            override fun onFailure(call: Call<RecentPostModel>?, t: Throwable?) {
+            override fun onFailure(call: Call<RecentPost>?, t: Throwable?) {
                 callback?.onFailure(t?.message.toString())
             }
         })

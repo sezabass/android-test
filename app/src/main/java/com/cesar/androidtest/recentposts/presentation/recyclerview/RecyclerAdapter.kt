@@ -8,12 +8,12 @@ import android.widget.LinearLayout
 import com.cesar.androidtest.R
 import com.cesar.androidtest.inflate
 import com.cesar.androidtest.recentposts.presentation.RecentPostsActivity
-import com.cesar.androidtest.recentposts.model.RecentPostModel
+import com.cesar.androidtest.recentposts.model.RecentPost
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.recyclerview_item_row.view.*
 
 class RecyclerAdapter(private val context: Context,
-                      private val posts: List<RecentPostModel>,
+                      private val posts: List<RecentPost>,
                       private val picasso: Picasso) :
         RecyclerView.Adapter<RecyclerAdapter.PostHolder>() {
 
@@ -42,7 +42,7 @@ class RecyclerAdapter(private val context: Context,
             RecyclerView.ViewHolder(v), View.OnClickListener {
 
         private var view: View = v
-        private var post: RecentPostModel? = null
+        private var post: RecentPost? = null
 
         init {
             v.setOnClickListener(this)
@@ -52,7 +52,7 @@ class RecyclerAdapter(private val context: Context,
             (this.context as RecentPostsActivity).onPostsListItemClicked(v, post)
         }
 
-        fun bindPost(post: RecentPostModel, picasso: Picasso) {
+        fun bindPost(post: RecentPost, picasso: Picasso) {
 
             this.post = post
             view.itemBody.text = post.data?.title

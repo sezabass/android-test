@@ -3,7 +3,7 @@ package com.cesar.androidtest.recentposts.model
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-class RecentPostModel {
+class RecentPost {
     var data: Data? = null
 
     fun imageUrl() = this.data?.preview?.images?.get(0)?.source?.url
@@ -14,7 +14,7 @@ class Data {
     var after: String? = null
     var name: String? = null
     var id: String? = null
-    var children: Array<RecentPostModel>? = null
+    var children: Array<RecentPost>? = null
     var title: String? = null
     var url: String? = null
     var author: String? = null

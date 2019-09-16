@@ -15,7 +15,7 @@ import com.cesar.androidtest.postdetails.PostDetailsActivity
 import com.cesar.androidtest.recentposts.RecentPostsContract
 import com.cesar.androidtest.recentposts.di.DaggerRecentPostsComponent
 import com.cesar.androidtest.recentposts.di.RecentPostsModule
-import com.cesar.androidtest.recentposts.model.RecentPostModel
+import com.cesar.androidtest.recentposts.model.RecentPost
 import com.cesar.androidtest.recentposts.presentation.recyclerview.EndlessRecyclerViewScrollListener
 import com.cesar.androidtest.recentposts.presentation.recyclerview.RecyclerAdapter
 import com.squareup.picasso.Picasso
@@ -32,7 +32,7 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
 
     private lateinit var adapter: RecyclerAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private var postsList: ArrayList<RecentPostModel> = ArrayList()
+    private var postsList: ArrayList<RecentPost> = ArrayList()
     private lateinit var scrollListener: EndlessRecyclerViewScrollListener
 
     open fun initializeDependencies() {
@@ -87,7 +87,7 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
         recentPostsSwipeRefreshLayout.isRefreshing = false
     }
 
-    override fun onListLoadingComplete(postsListResult: List<RecentPostModel>) {
+    override fun onListLoadingComplete(postsListResult: List<RecentPost>) {
         runOnUiThread {
             postsList.clear()
             postsList.addAll(postsListResult)
@@ -95,18 +95,18 @@ open class RecentPostsActivity : AppCompatActivity(), RecentPostsContract.View,
         }
     }
 
-    override fun onListAddingComplete(response: List<RecentPostModel>) {
+    override fun onListAddingComplete(response: List<RecentPost>) {
         runOnUiThread {
             postsList.addAll(response)
             adapter.notifyDataSetChanged()
         }
     }
 
-    override fun onPostsListItemClicked(listItem: View, post: RecentPostModel?) {
+    override fun onPostsListItemClicked(listItem: View, post: RecentPost?) {
         presenter.onPostsListItemClicked(post)
     }
 
-    override fun showPostDetails(post: RecentPostModel?) {
+    override fun showPostDetails(post: RecentPost?) {
         val postId = post?.data?.id
         val postTitle = post?.data?.title
         val postImage = post?.imageUrl()

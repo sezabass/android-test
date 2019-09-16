@@ -1,7 +1,7 @@
 package com.cesar.androidtest.recentposts.domain
 
 import com.cesar.androidtest.recentposts.RecentPostsContract
-import com.cesar.androidtest.recentposts.model.RecentPostModel
+import com.cesar.androidtest.recentposts.model.RecentPost
 import com.cesar.androidtest.recentposts.model.RecentPostsRepository
 import javax.inject.Inject
 
@@ -15,7 +15,7 @@ class RecentPostsInteractor @Inject constructor(
     override fun requestList(lastViewed: String?) {
 
         repository.list(lastViewed, object : RecentPostsRepository.ResultListener {
-            override fun onResponseSuccessful(response: List<RecentPostModel>) {
+            override fun onResponseSuccessful(response: List<RecentPost>) {
                 if (lastViewed == null) {
                     presenter?.onReplaceListResponseSuccessful(response)
                 } else {

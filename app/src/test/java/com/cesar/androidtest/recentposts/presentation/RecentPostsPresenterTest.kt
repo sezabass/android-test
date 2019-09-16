@@ -1,7 +1,7 @@
 package com.cesar.androidtest.recentposts.presentation
 
 import com.cesar.androidtest.recentposts.RecentPostsContract
-import com.cesar.androidtest.recentposts.model.RecentPostModel
+import com.cesar.androidtest.recentposts.model.RecentPost
 import com.nhaarman.mockito_kotlin.same
 import com.nhaarman.mockito_kotlin.verify
 import org.junit.Before
@@ -45,21 +45,21 @@ class RecentPostsPresenterTest {
 
     @Test
     fun givenListRequestedWhenModelReturnsReplaceSuccessThenCallViewSuccess() {
-        presenter.onReplaceListResponseSuccessful(listOf(RecentPostModel()))
+        presenter.onReplaceListResponseSuccessful(listOf(RecentPost()))
         verify(mockView).hideLoading()
         verify(mockView).onListLoadingComplete(any())
     }
 
     @Test
     fun givenListRequestedWhenModelReturnsAddSuccessThenCallViewSuccess() {
-        presenter.onAddToListResponseSuccessful(listOf(RecentPostModel()))
+        presenter.onAddToListResponseSuccessful(listOf(RecentPost()))
         verify(mockView).hideLoading()
         verify(mockView).onListAddingComplete(any())
     }
 
     @Test
     fun whenOnPostsListItemClickedThenCallViewShowPostDetails() {
-        val somePost = RecentPostModel()
+        val somePost = RecentPost()
         presenter.onPostsListItemClicked(somePost)
         verify(mockView).showPostDetails(same(somePost))
     }

@@ -2,7 +2,7 @@ package com.cesar.androidtest.recentposts.presentation
 
 import com.cesar.androidtest.recentposts.di.RecentPostsTestActivityMock
 import com.cesar.androidtest.recentposts.model.Data
-import com.cesar.androidtest.recentposts.model.RecentPostModel
+import com.cesar.androidtest.recentposts.model.RecentPost
 import junit.framework.TestCase.assertFalse
 import kotlinx.android.synthetic.main.activity_recentposts.*
 import org.junit.Before
@@ -17,11 +17,11 @@ class RecentPostsActivityTest {
 
     private lateinit var activity: RecentPostsActivity
 
-    private val sampleList = ArrayList<RecentPostModel>()
+    private val sampleList = ArrayList<RecentPost>()
 
     @Before
     fun setUp() {
-        val samplePost = RecentPostModel()
+        val samplePost = RecentPost()
         val sampleData = Data()
         sampleData.author = "Sample Author"
         sampleData.title = "Sample Title"

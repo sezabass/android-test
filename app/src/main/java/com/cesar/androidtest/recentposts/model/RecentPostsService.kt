@@ -11,5 +11,5 @@ interface RecentPostsService {
             @Query("limit") limit: Int,
             @Query("count") count: Int,
             @Query("after") after: String?
-    ): Call<RecentPostModel>
+    ): Call<RecentPost>
 }
