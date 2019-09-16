@@ -3,6 +3,7 @@ package com.cesar.androidtest.recentposts.model
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
 interface RecentPostsRepository {
     fun list(lastViewed: String?, callback: ResultListener?)
@@ -14,7 +15,8 @@ interface RecentPostsRepository {
     }
 }
 
-class RecentPostsRepositoryImpl(val service: RecentPostsService) : RecentPostsRepository {
+class RecentPostsRepositoryImpl @Inject constructor(
+        private val service: RecentPostsService) : RecentPostsRepository {
 
     override fun list(lastViewed: String?, callback: RecentPostsRepository.ResultListener?) {
 

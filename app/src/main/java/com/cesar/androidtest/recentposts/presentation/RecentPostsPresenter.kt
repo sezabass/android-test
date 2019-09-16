@@ -5,8 +5,10 @@ import com.cesar.androidtest.recentposts.model.RecentPostModel
 import javax.inject.Inject
 
 class RecentPostsPresenter @Inject constructor(
-        val view: RecentPostsContract.View, val interactor: RecentPostsContract.Interactor) :
+        private val interactor: RecentPostsContract.Interactor) :
         RecentPostsContract.Presenter {
+
+    lateinit var view: RecentPostsContract.View
 
     override fun onLoad() {
         interactor.requestList(null)

@@ -3,9 +3,12 @@ package com.cesar.androidtest.recentposts.domain
 import com.cesar.androidtest.recentposts.RecentPostsContract
 import com.cesar.androidtest.recentposts.model.RecentPostModel
 import com.cesar.androidtest.recentposts.model.RecentPostsRepository
+import javax.inject.Inject
 
 
-class RecentPostsInteractor(val repository: RecentPostsRepository) : RecentPostsContract.Interactor {
+class RecentPostsInteractor @Inject constructor(
+        private val repository: RecentPostsRepository
+) : RecentPostsContract.Interactor {
 
     var presenter: RecentPostsContract.Presenter? = null
 

@@ -26,7 +26,9 @@ class RecentPostsPresenterTest {
         mockView = Mockito.mock(RecentPostsContract.View::class.java)
         mockInteractor = Mockito.mock(RecentPostsContract.Interactor::class.java)
 
-        presenter = RecentPostsPresenter(mockView, mockInteractor)
+        presenter = RecentPostsPresenter(mockInteractor).apply {
+            view = mockView
+        }
     }
 
     @Test
