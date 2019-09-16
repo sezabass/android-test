@@ -44,7 +44,6 @@ ext {
     retrofit_version = '2.6.1'
     dagger_version = '2.24'
     picasso_version = '2.71828'
-    support_version = '27.1.0'
     espresso_version = '3.0.1'
 }
 

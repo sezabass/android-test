@@ -27,11 +27,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/post_details_comments_list_margin_top"
         android:padding="@dimen/post_details_title_padding"
-        app:layout_constraintTop_toBottomOf="@id/postDetailsImage"
         android:textSize="@dimen/post_details_title"
         tools:layout_editor_absoluteY="287dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@id/postDetailsImage"
+        app:layout_constraintTop_toBottomOf="@id/postDetailsImage"
         tools:text="Some post text" />
 
     <Button

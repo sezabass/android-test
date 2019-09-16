@@ -1,12 +1,13 @@
 package com.cesar.androidtest.recentposts.model
 
+import com.cesar.androidtest.fromHtml
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 class RecentPost {
     var data: Data? = null
 
-    fun imageUrl() = this.data?.preview?.images?.get(0)?.source?.url
+    fun imageUrl(): String? = this.data?.preview?.images?.get(0)?.source?.url?.fromHtml()
 }
 
 @JsonIgnoreProperties(ignoreUnknown = true)
